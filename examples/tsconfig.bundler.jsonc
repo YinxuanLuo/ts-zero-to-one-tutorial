@@ -1,0 +1,55 @@
+// tsconfig.bundler.jsonc
+// ============================================================================
+// 第 08 章配套：前端 Vite / React 场景推荐配置
+//
+// 核心差异（跟 Node 服务版比）：
+//   1. module / moduleResolution 用 "Bundler" —— 因为真正处理 import 的是
+//      Vite（内部是 esbuild + Rollup），不是 Node。Bundler 模式允许
+//      "省略后缀"（import './App'），跟打包器行为完全一致。
+//   2. lib 里必须有 "DOM"、"DOM.Iterable" —— 否则 document / window 全报 TS2584。
+//   3. jsx 必须开 —— 否则 .tsx 里的 <div /> 直接语法报错。
+//   4. noEmit 必须 true —— 产物交给 Vite，tsc 只负责挑错。
+//      于是日常脚本是两道：vite build 生成产物，tsc --noEmit 做类型门禁。
+//
+// 用法：npx tsc -p tsconfig.bundler.jsonc
+// ============================================================================
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    // 浏览器运行时提供的内置 API：ES2023 语言标准库 + DOM 相关声明。
+    // DOM.Iterable 让 NodeList / HTMLCollection 支持 for...of。
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+
+    // 打包器模式：允许无后缀导入、允许读 package.json 的 exports 字段。
+    // 为什么不用 NodeNext：NodeNext 强制相对路径必须写 .js/.ts 后缀，
+    // 而 Vite 里写 './App' 才是主流写法，用 NodeNext 会满屏 TS2835。
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    // React 17+ 的自动 JSX runtime，不需要在每个文件里 import React。
+    // 用 Vue 的话删掉这一项，改用 vue-tsc 做检查。
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // 前端不可能让 tsc 产出 JS：Vite 的产物包含 CSS / 图片 / 代码分割，
+    // tsc 只会吐出一堆裸 JS 文件，把产物目录搞乱。
+    "noEmit": true,
+
+    // 路径别名：配合 vite.config.ts 里的 resolve.alias 一起用，两边必须一致。
+    // 只有 paths 没有 baseUrl 时，paths 相对本文件所在目录解析。
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}

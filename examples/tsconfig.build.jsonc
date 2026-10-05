@@ -1,0 +1,67 @@
+// tsconfig.build.jsonc
+// ============================================================================
+// 第 08 章配套：用 extends 做"开发 / 构建两套配置"
+//
+// 它继承主配置 tsconfig.json 的一切，然后：
+//   - 把 noEmit 关掉，打开 outDir / declaration —— 因为要发 npm 包
+//   - 把源码目录收窄到 src —— 别把测试和脚本也编进产物
+//   - 打开 declarationMap + sourceMap —— 让用户点进 .d.ts 能跳回 .ts 源码
+//
+// 为什么必须分两套：
+//   开发时你想要"看得见的错"，构建时你想要"正确的产物"。
+//   把 noEmit 从 true 改来改去太容易出错（忘记改回来 = CI 白跑）。
+//   于是 package.json 里写两条脚本各管一件事：
+//     "check": "tsc --noEmit",                       // 开发/CI 门禁
+//     "build": "tsc -p tsconfig.build.jsonc",        // 出产物
+//
+// 用法：npx tsc -p tsconfig.build.jsonc
+// ============================================================================
+{
+  // 继承主配置：strict / target / module / moduleResolution 等全部沿用。
+  // 相对路径按"本文件所在目录"解析，不是按被继承的文件。
+  "extends": "./tsconfig.json",
+
+  "compilerOptions": {
+    // 覆盖父配置的 noEmit: true —— 现在要真的产出文件了。
+    "noEmit": false,
+
+    // outDir: 产物目录。不开（或跟源码同目录）会怎样：
+    //   .js 文件跟 .ts 文件混在 src 里，下次编译 tsc 会把上一轮的 .js 也当输入，
+    //   出现重复标识符 / 编译死循环式的脏报错。
+    "outDir": "./dist",
+
+    // rootDir: 源码根目录，tsc 用它来算"产物目录结构"。
+    //   不设的话 tsc 取所有输入文件的公共父目录，很容易变成 "."，
+    //   于是产物变成 dist/src/index.js 而不是 dist/index.js，包入口全错。
+    "rootDir": "./src",
+
+    // declaration: 生成 .d.ts 类型声明文件。
+    //   发 npm 包必须开，否则用你包的人全是 any（TS7016 找不到声明文件）。
+    "declaration": true,
+
+    // declarationMap: 生成 .d.ts.map，让用户 ctrl+点击能从 .d.ts 跳回你自己的 .ts。
+    //   自己项目内部用不到，对外发布强烈建议开，调试体验差别巨大。
+    "declarationMap": true,
+
+    // sourceMap: 生成 .js.map，让报错栈能映射回 TS 源码行号。
+    //   不开会怎样：线上报错只给你一行压缩过的 JS，完全没法定位。
+    "sourceMap": true,
+
+    // removeComments: 产物里去掉注释。
+    //   默认 false（保留），因为很多人靠 /*! @license */ 注释做版权声明。
+    //   想在产物里保留 license，就别开它，或者用 terser 的 extractComments。
+    "removeComments": false,
+
+    // allowImportingTsExtensions 在"真的要产出 JS"时会报 TS5096，
+    // 所以构建配置里必须显式关掉，源码里相对导入要写 .js 后缀（NodeNext 规则）。
+    "allowImportingTsExtensions": false
+  },
+
+  // ↓↓↓ 注意：include / exclude 是"顶层字段"，不能塞进 compilerOptions 里。
+  //     塞错了就是 TS5023: Unknown compiler option 'include'。
+  //
+  // 收窄输入范围：只编译会进产物的源码。
+  // 不写 include 会继承父配置的 include（**/*.ts），把测试文件也编出去。
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+}

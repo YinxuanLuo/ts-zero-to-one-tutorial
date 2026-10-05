@@ -1,0 +1,16 @@
+{
+  "name": "ts-zero-to-one",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "TypeScript 从零到一教程配套可运行代码",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "tsc",
+    "demo": "node --experimental-strip-types"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.1",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,643 @@
+{
+  "stage1": [
+    {
+      "id": "s1-1",
+      "no": 1,
+      "q": "`let x = 1` 之后，`x` 的类型是字面量 `1`。",
+      "answer": false,
+      "why": "`let` 推断成 `number`（因为后面可能改成别的数字）。只有 `const x = 1` 才推断成字面量 `1`。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-2",
+      "no": 2,
+      "q": "`interface` 在编译后会变成一个真实的 JavaScript 对象。",
+      "answer": false,
+      "why": "`interface` 只活在类型空间，编译后完全消失（类型擦除）。",
+      "from": "00 章"
+    },
+    {
+      "id": "s1-3",
+      "no": 3,
+      "q": "`any` 可以赋值给任何类型，任何类型也可以赋值给 `any`。",
+      "answer": true,
+      "why": "`any` 是双向黑洞，这正是它危险的原因。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-4",
+      "no": 4,
+      "q": "`unknown` 类型的值可以直接访问属性，比如 `u.name`。",
+      "answer": false,
+      "why": "`unknown` 必须先收窄才能操作，否则报 `TS18046`。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-5",
+      "no": 5,
+      "q": "`never` 是所有类型的子类型，可以赋值给任何类型。",
+      "answer": true,
+      "why": "`never` 是\"底层类型\"，可以赋值给任何类型，但没有任何值能赋值给它。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-6",
+      "no": 6,
+      "q": "开启 `strictNullChecks` 后，`null` 不能赋值给 `string`。",
+      "answer": true,
+      "why": "这就是 `strictNullChecks` 的价值。",
+      "from": "08 章"
+    },
+    {
+      "id": "s1-7",
+      "no": 7,
+      "q": "`String` 和 `string` 是同一个类型。",
+      "answer": false,
+      "why": "`String` 是包装对象类型，`string` 是原始类型。永远用小写。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-8",
+      "no": 8,
+      "q": "`const a = [1, 'x']` 之后，`a` 的类型是 `(string | number)[]`。",
+      "answer": true,
+      "why": "数组的元素类型会被推断成所有元素类型的联合。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-9",
+      "no": 9,
+      "q": "`readonly number[]` 在运行时真的不可修改。",
+      "answer": false,
+      "why": "`readonly` 是纯编译期约束，运行时数组照样能 `push`（只是类型上不给你这个方法）。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-10",
+      "no": 10,
+      "q": "`as` 会在运行时做真正的类型转换。",
+      "answer": false,
+      "why": "`as` 只做编译期的断言，运行时一行代码都不生成。",
+      "from": "00 章"
+    },
+    {
+      "id": "s1-11",
+      "no": 11,
+      "q": "TypeScript 的 `private` 成员在运行时是真的私有，外部访问不到。",
+      "answer": false,
+      "why": "TS 的 `private` 只是编译期约定，`(obj as any).secret` 照样能读。JS 原生的 `#field` 才是真私有。",
+      "from": "07 章"
+    },
+    {
+      "id": "s1-12",
+      "no": 12,
+      "q": "泛型参数 `T` 在运行时存在，所以可以写 `new T()`。",
+      "answer": false,
+      "why": "`T` 是纯类型，运行时不存在。想 `new` 得把构造函数当参数传进来。",
+      "from": "00 / 05 章"
+    },
+    {
+      "id": "s1-13",
+      "no": 13,
+      "q": "一个参数更少的函数，可以赋值给一个参数更多的函数类型。",
+      "answer": true,
+      "why": "参数少的函数可以赋值给参数多的函数类型（\"少要求一点没关系\"）。前提是参数类型兼容。",
+      "from": "03 章"
+    },
+    {
+      "id": "s1-14",
+      "no": 14,
+      "q": "写两个同名的 `interface A { }` 会报\"重复定义\"错误。",
+      "answer": false,
+      "why": "`interface` 同名会**声明合并**，这是刻意设计的特性（比如给 Express 的 `Request` 加 `user` 字段）。",
+      "from": "07 章"
+    },
+    {
+      "id": "s1-15",
+      "no": 15,
+      "q": "写两个同名的 `type A = { }` 会报\"重复定义\"错误。",
+      "answer": true,
+      "why": "`type` 别名不能重名，会报 `TS2300: Duplicate identifier`。",
+      "from": "07 章"
+    },
+    {
+      "id": "s1-16",
+      "no": 16,
+      "q": "一个返回 `string` 的函数，可以赋值给返回类型是 `void` 的函数类型。",
+      "answer": true,
+      "why": "这是 `void` 的刻意设计：它容忍\"返回值被忽略\"，所以 `forEach` 能接受任何回调。",
+      "from": "02 章"
+    },
+    {
+      "id": "s1-17",
+      "no": 17,
+      "q": "`keyof { a: 1; b: 2 }` 的结果是 `'a' | 'b'`。",
+      "answer": true,
+      "why": "`keyof` 取出所有键名组成联合类型。",
+      "from": "06 章"
+    },
+    {
+      "id": "s1-18",
+      "no": 18,
+      "q": "`Object.keys({ a: 1 })` 的返回类型是 `'a'[]`。",
+      "answer": false,
+      "why": "返回的是 `string[]`，不是 `'a'[]`。这是 TS 刻意的不精确（为了兼容存量 JS 代码）。",
+      "from": "00 / 06 章"
+    },
+    {
+      "id": "s1-19",
+      "no": 19,
+      "q": "`enum` 可以被 Node 的原生类型擦除模式直接运行。",
+      "answer": false,
+      "why": "`node x.ts` 会在 `enum` 上报 `ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX`。`enum` 不是\"可擦除语法\"，要用 `node --experimental-transform-types` 才能跑。",
+      "from": "01 章"
+    },
+    {
+      "id": "s1-20",
+      "no": 20,
+      "q": "`Array<string>` 和 `string[]` 是完全等价的写法。",
+      "answer": true,
+      "why": "两种写法完全等价，`string[]` 只是语法糖。",
+      "from": "02 章"
+    }
+  ],
+  "stage2": [
+    {
+      "id": "s2-1",
+      "no": 1,
+      "code": "const q1 = 1;",
+      "type": "`1`",
+      "note": "`const` + 字面量 → 字面量类型"
+    },
+    {
+      "id": "s2-2",
+      "no": 2,
+      "code": "let q2 = 1;",
+      "type": "`number`",
+      "note": "`let` 会放宽（可能被改成别的数字）"
+    },
+    {
+      "id": "s2-3",
+      "no": 3,
+      "code": "const q3 = [1, 'a', true];",
+      "type": "`(string \\",
+      "note": "number \\| boolean)[]` | 数组元素类型取联合"
+    },
+    {
+      "id": "s2-4",
+      "no": 4,
+      "code": "const q4 = { name: 'Tom', age: 18 };",
+      "type": "`{ name: string; age: number }`",
+      "note": "对象字面量的属性不会被收窄成字面量"
+    },
+    {
+      "id": "s2-5",
+      "no": 5,
+      "code": "const q5 = { name: 'Tom', age: 18 } as const;",
+      "type": "`{ readonly name: \"Tom\"; readonly age: 18 }`",
+      "note": "`as const` 让属性变 `readonly` 且收窄成字面量"
+    },
+    {
+      "id": "s2-6",
+      "no": 6,
+      "code": "const q6 = ['red', 'green'] as const;",
+      "type": "`readonly [\"red\", \"green\"]`",
+      "note": "`as const` 把数组变只读元组"
+    },
+    {
+      "id": "s2-7",
+      "no": 7,
+      "code": "const q7 = null;",
+      "type": "`null`",
+      "note": "字面量 `null` 的类型就是 `null`"
+    },
+    {
+      "id": "s2-8",
+      "no": 8,
+      "code": "const q8 = [1, 2] as const;",
+      "type": "`readonly [1, 2]`",
+      "note": "只读元组，每个位置的类型都精确"
+    },
+    {
+      "id": "s2-9",
+      "no": 9,
+      "code": "function q9(a: number, b: string) {\n  return a + b.length;\n}\n// q9 的返回类型是？",
+      "type": "`number`",
+      "note": "`a + b.length` → `number`"
+    },
+    {
+      "id": "s2-10",
+      "no": 10,
+      "code": "const q10 = q4.age > 1 ? 'adult' : 0;",
+      "type": "`string \\",
+      "note": "number` | 三元表达式的两个分支类型取联合"
+    },
+    {
+      "id": "s2-11",
+      "no": 11,
+      "code": "const q11 = <T,>(x: T) => ({ value: x });\n// q11 的类型是？",
+      "type": "`<T>(x: T) => { value: T }`",
+      "note": "泛型箭头函数"
+    },
+    {
+      "id": "s2-12",
+      "no": 12,
+      "code": "const q12 = q11(42);\n// 注意：不是 { value: 42 }，为什么？",
+      "type": "`{ value: number }`",
+      "note": "**注意不是 `{ value: 42 }`**：字面量实参在推断 `T` 时会**放宽**成 `number`"
+    },
+    {
+      "id": "s2-13",
+      "no": 13,
+      "code": "const q13 = [1, 2, 3].filter((n) => n > 1);",
+      "type": "`number[]`",
+      "note": "`filter` 不改变元素类型"
+    },
+    {
+      "id": "s2-14",
+      "no": 14,
+      "code": "const q14 = [1, 2, 3].map((n) => String(n));",
+      "type": "`string[]`",
+      "note": "`map` 的 `U` 从回调返回值推断"
+    },
+    {
+      "id": "s2-15",
+      "no": 15,
+      "code": "function q15<T extends { id: string }>(items: T[]): T['id'][] {\n  return items.map((i) => i.id);\n}\n// q15 的返回类型是？",
+      "type": "`string[]`",
+      "note": "`T['id']` 是索引访问类型，得到 `string`"
+    },
+    {
+      "id": "s2-16",
+      "no": 16,
+      "code": "const q16 = q15([{ id: 'a', name: 'x' }]);",
+      "type": "`string[]`",
+      "note": "—"
+    },
+    {
+      "id": "s2-17",
+      "no": 17,
+      "code": "declare const q17input: { a: number } | { b: string };\nconst q17 = 'a' in q17input ? q17input.a : q17input.b;",
+      "type": "`string \\",
+      "note": "number` | `in` 收窄了两个分支，但 `?:` 又把它们合起来了"
+    },
+    {
+      "id": "s2-18",
+      "no": 18,
+      "code": "const q18 = JSON.parse('{}');",
+      "type": "**`any`**",
+      "note": "★ `JSON.parse` 的返回类型是 `any`——这是运行时数据不受类型保护的最典型例子"
+    },
+    {
+      "id": "s2-19",
+      "no": 19,
+      "code": "const q19 = q4['name'];",
+      "type": "`string`",
+      "note": "索引访问类型 `q4['name']`"
+    },
+    {
+      "id": "s2-20",
+      "no": 20,
+      "code": "const q20 = Object.keys(q4);",
+      "type": "**`string[]`**",
+      "note": "★ 不是 `('name'\\|'age')[]`。这是 TS 的著名\"不精确\"，为了兼容存量代码"
+    },
+    {
+      "id": "s2-21",
+      "no": 21,
+      "code": "const q21 = Object.entries(q4);",
+      "type": "`[string, string \\",
+      "note": "number][]` | `Object.entries` 的键是 `string`，值是值的联合"
+    },
+    {
+      "id": "s2-22",
+      "no": 22,
+      "code": "const q22 = new Map<string, number>();\nconst q23 = q22.get('x');",
+      "type": "`Map<string, number>`",
+      "note": "—"
+    },
+    {
+      "id": "s2-23",
+      "no": 23,
+      "code": "",
+      "type": "`number \\",
+      "note": "undefined` | ★ `Map.get` 可能取不到，所以必须处理 `undefined`"
+    },
+    {
+      "id": "s2-24",
+      "no": 24,
+      "code": "const q24 = [1, 2, 3][10];",
+      "type": "**`number`**",
+      "note": "★ 不是 `number \\| undefined`！普通数组越界 TS 不管。想让它管，开 `noUncheckedIndexedAccess`"
+    },
+    {
+      "id": "s2-25",
+      "no": 25,
+      "code": "const q25 = Promise.resolve(1);",
+      "type": "`Promise<number>`",
+      "note": "—"
+    }
+  ],
+  "interview": [
+    {
+      "id": "iv-1-0",
+      "no": 1,
+      "q": "`interface` 和 `type` 的区别？该用哪个？",
+      "a": "**答：能力 80% 重叠。`interface` 能声明合并、报错信息更友好、继承关系检查更快；`type` 能表达联合、元组、条件、映射、模板字面量。对象形状 / 公共 API 用 `interface`，其余（联合、工具类型、函数签名）用 `type`。**\n\n- 同名合并：两个 `interface User` 会自动合并属性；两个 `type User` 直接 `TS2300 Duplicate identifier`。\n- `interface A extends B` 只能继承对象类型（interface / class / 对象类型别名）；`type A = B & C` 可交叉任意类型，但重复属性会变成 `never` 而不是报错，坑更深。\n- `interface` 的 extends 冲突会在**声明处**报错；`type` 交叉冲突往往拖到**使用处**才炸，所以公共库导出面建议 interface。\n- 性能：接口有缓存的名字，类型关系检查通常更快；超大交叉类型链会拖慢编辑器（TS 7 对此改善明显）。\n- 一句话收口：\"**能合并、要给别人扩展 → interface；要组合、要算 → type**。\"\n```ts\ninterface Box { v: string }\ninterface Box { n: number }        // 合并：Box = { v: string; n: number }\n\ntype Pair = [number, string];       // type 才能做元组\ntype Id = string | number;          // 联合只能 type\n```"
+    },
+    {
+      "id": "iv-2-1",
+      "no": 2,
+      "q": "TS 是结构化类型还是名义类型？`private` 为什么破坏结构化？",
+      "a": "**答：TS 是结构化类型（structural typing）——只看形状，不看名字；但 `private` / `protected` 成员会被打上\"来自哪个类\"的名义标记，因此带私有成员的类型等价于名义类型。**\n\n- 结构化的表现：`class A { x = 1 }` 的对象可以赋给 `interface { x: number }`，无需继承关系。\n- `private` 一旦出现，两个\"形状一样但私有成员声明自不同类\"的类型就互不兼容——这就是 TS 里名义类型唯一的存在方式。\n- JS 的原生 `#field` 更彻底：它是真正的运行时私有槽，类型比较上也要求同一声明来源。\n- 面试加分点：结构化类型的好处是天然兼容鸭子类型和 JS 生态；坏处是两个恰好形状相同的业务类型（`UserId` 和 `OrderId` 都是 `string`）会被认为是同一个类型，需要靠 brand（`string & { __brand: 'UserId' }`）来模拟名义类型。"
+    },
+    {
+      "id": "iv-3-2",
+      "no": 3,
+      "q": "`any` / `unknown` / `never` / `void` 分别是什么？什么时候用？",
+      "a": "**答：`any` 关闭检查、`unknown` 是\"未知但必须收窄才能用\"的安全版 any、`never` 是\"不可能存在\"的底类型、`void` 是\"函数返回值无意义\"。**\n\n- `any`：双向可赋值，且会传染（用它做运算结果也是 any）；只在迁移旧代码、临时救火时用。\n- `unknown`：任何值都能赋给它，但它不能赋给别人、不能直接访问属性——必须先 `typeof` / 类型守卫收窄。**外部输入（JSON、catch、第三方 SDK）一律用 unknown。**\n- `never`：是所有类型的子类型，能赋给任何人；但除了 `never` 没人能赋给它。表示\"不会有值\"。\n- `void`：只用于返回值位置，`() => void` 表示\"我不管你返回什么\"（这正是它能接受返回 `number` 的函数的原因）。\n- 记忆：`any` = 关掉检查，`unknown` = 检查但不知道，`never` = 不可能，`void` = 无意义。\n```ts\nfunction f(): void {}\nconst a: any = JSON.parse(s);          // 不报错，危险\nconst b: unknown = JSON.parse(s);      // 安全：用之前必须窄化\nif (typeof b === 'object' && b && 'id' in b) { /* 现在才能用 */ }\n```\n\n**Q4: `never` 有什么用？举一个实际场景。**\n\n**答：三个用途——穷尽性检查（exhaustiveness check）、标记不可能抛出的分支、在类型体操里做\"过滤/取反\"。**\n\n- 穷尽检查最常用：`switch` / `if-else` 覆盖了联合的所有成员后，`default` 分支的变量会被收窄成 `never`；一旦以后新增了成员而忘了处理，这里立刻报错。\n- `never[]` 与 `Array<never>`：`filter` 的类型守卫 `is` 可以返回 `never` 来剔除类型。\n- 工具类型里 `never` 是联合的\"空元\"：`T | never = T`，映射类型返回 `never` 的键会被自动删掉。\n- 注意：`never` 不是 `undefined`，也不等于\"函数没有 return\"，是\"这个代码路径不可能到达\"。\n```ts\ntype Shape = { kind: 'circle'; r: number } | { kind: 'square'; s: number };\n\nfunction area(s: Shape): number {\n  switch (s.kind) {\n    case 'circle': return Math.PI * s.r ** 2;\n    case 'square': return s.s ** 2;\n    default: {\n      const _exhaustive: never = s;   // 新增 kind 时这里报 TS2322\n      throw new Error(`unhandled: ${JSON.stringify(_exhaustive)}`);\n    }\n  }\n}\n```"
+    },
+    {
+      "id": "iv-5-3",
+      "no": 5,
+      "q": "`object` / `{}` / `Record<string, never>` 有什么区别？",
+      "a": "**答：`object` = 任何非原始类型（不含 string/number/boolean/null/undefined）；`{}` = 除 `null` / `undefined` 之外的**任何**值（包括 `42`、`'x'`）；`Record<string, never>` = \"不许有任何属性的空对象\"。**\n\n- `{}` 是最容易被误读的类型：它不是\"空对象\"，`const x: {} = 42` 完全合法。想表达\"任意对象\"用 `object` 或 `Record<string, unknown>`。\n- `object` 也不能直接取属性（`obj.foo` 报 `TS2339`），先收窄或断言。\n- `Record<string, never>` 的实战用途：表达\"这个是空对象，谁也别往里塞键\"（比如某些 API 的 `options` 参数）。\n- ESLint `@typescript-eslint/ban-types` 默认禁用 `{}` 和 `Object`，就是怕人把它当\"空对象\"用。\n```ts\nconst a: {} = 42;                      // ✅ 合法，反直觉\nconst b: object = 42;                  // ❌ TS2322\nconst c: Record<string, never> = {};    // ✅\nconst d: Record<string, never> = { x: 1 }; // ❌ TS2322\n```"
+    },
+    {
+      "id": "iv-6-4",
+      "no": 6,
+      "q": "类型断言 `as` 和类型转换有什么区别？为什么说 `as` 危险？",
+      "a": "**答：`as` 是纯编译期的\"断言\"，不做任何运行时检查、不生成任何代码、不改变值本身；类型转换（如 `Number(x)`）是运行时真正改变值。`as` 危险在于它能骗过编译器，让类型与运行时事实脱节。**\n\n- `as` 不会失败、不会 throw；错的就是运行时的你。所有 `as` 都是\"我对编译器承诺，出事我负责\"。\n- 双向都不兼容时会报 `TS2352`（类型不充分重叠）；绕过方式是双重断言 `x as unknown as T`——**这行代码在 code review 里应该被质询**。\n- 正确替代顺序：类型守卫（`typeof` / `in` / 自定义 `is`）→ schema 校验（zod / valibot）→ 最后才 `as`。\n- 反直觉例子：`const x = 'a' as string as number` 编译通过，运行时 `x` 还是字符串，之后 `.toFixed()` 直接崩。"
+    },
+    {
+      "id": "iv-7-5",
+      "no": 7,
+      "q": "`as const` 做了什么？",
+      "a": "**答：把推断结果\"降到最窄\"——字面量保留字面量类型、数组变 `readonly` 元组、对象所有属性变 `readonly`。**\n\n- 不加 `as const`：`const arr = ['a', 'b']` → `string[]`，元素类型被放宽。\n- 加 `as const`：`readonly ['a', 'b']`，且 `arr[0]` 的类型精确到 `'a'`。\n- 对象：`{ mode: 'dark' }` → `{ readonly mode: 'dark' }`，这正好满足判别联合（discriminated union）的 `kind` 字段需求。\n- 它作用在**字面量表达式**上，不能对变量用（`let x = 1; x as const` 是错的，要用 `const x = 1` 或 `as const` 直接标注字面量）。\n- 只读是浅层的：`as const` 不会冻结嵌套对象之外的运行时行为，也不等于 `Object.freeze`。\n```ts\nconst routes = ['home', 'about'] as const;\ntype Route = (typeof routes)[number];   // 'home' | 'about'  —— 改数组，类型自动跟着变\n```"
+    },
+    {
+      "id": "iv-8-6",
+      "no": 8,
+      "q": "`satisfies` 是什么？和 `as`、和类型注解有什么区别？",
+      "a": "**答：`satisfies T`（TS 4.9）在\"检查值是否符合 T\"的同时**保留值自身最窄的推断类型**。注解会放宽类型，`as` 完全不检查。**\n\n- 注解 `const cfg: Config = {...}`：检查 ✅，但 `cfg.mode` 的类型被放宽成 `Config['mode']`，丢失字面量。\n- `as`：放宽/收窄都不报错，等于关掉检查。\n- `satisfies`：检查 ✅ + 保留字面量 ✅，是配置对象场景的标准答案。\n```ts\ntype Config = Record<string, string | string[]>;\nconst cfg = { mode: 'dark', tags: ['a'] } satisfies Config;\ncfg.mode.toUpperCase();     // ✅ 仍是 string，不是 string | string[]\n// const bad: Config = { mode: 'dark' };  bad.mode.toUpperCase(); // ❌ 联合类型不能直接调\n```\n\n- 常见组合：`satisfies` + `as const`（先窄化再校验，常用于路由表、i18n key 表）。"
+    },
+    {
+      "id": "iv-9-7",
+      "no": 9,
+      "q": "TS 的类型在运行时存在吗？为什么？",
+      "a": "**答：不存在。类型注解、`interface`、`type`、泛型、`as` 全都在编译后被完全擦除（type erasure），运行时只有 JS。这就是\"TS 不能做运行时校验\"的根本原因。**\n\n- 擦除的证据：`const x: number = 1` 编译后就是 `const x = 1`；`interface User` 编译后一行都不剩。\n- 少数**会生成代码**的东西（不属于\"纯类型\"）：`enum`（生成对象）、`namespace`（非 `declare`）、类（本来就是值）、构造函数参数属性（生成赋值）、`experimentalDecorators` 的 `emitDecoratorMetadata`（生成 `design:type` 元数据）。\n- 因此：**能同时当类型和值用的只有 class、enum、namespace**；`import type` 的导入会被删掉。\n- 面试常被追问：\"那你怎么做运行时校验？\" → zod / valibot / io-ts / JSON Schema + ajv，原则是\"边界处校验一次，内部相信类型\"。"
+    },
+    {
+      "id": "iv-10-8",
+      "no": 10,
+      "q": "什么是类型收窄（narrowing）？TS 用哪些方式收窄？",
+      "a": "**答：收窄是 TS 根据运行时分支把宽类型\"砍\"成更窄类型的过程。依据分两类：控制流分析（if/switch/循环/早返回）和类型守卫表达式。**\n\n- 内建守卫：`typeof`、`instanceof`、`in`、`Array.isArray`、真值判断（`if (x)`）、相等比较（`x === null`、`x.kind === 'circle'`）、`switch` 的判别字段。\n- 自定义守卫：`function isUser(v: unknown): v is User`；断言函数 `function assert(v: unknown): asserts v is User`。\n- 控制流细节：`const` 变量会被精确收窄，`let` 变量在闭包/回调里可能被\"重置回声明类型\"（因为回调可能在任意时刻执行）。\n- 判别联合（discriminated union）是最常用的模式：所有成员共有一个字面量字段，`switch` 该字段即可自动收窄。\n- 坑：可选属性 `obj.a?.b` 收窄不会反向影响 `obj.a`；`as` 不是收窄而是覆盖。\n\n---"
+    },
+    {
+      "id": "iv-11-9",
+      "no": 11,
+      "q": "泛型是什么？为什么要用它而不是 `any`？",
+      "a": "**答：泛型是\"类型的参数\"——把类型当变量传进去，让类型信息在传入和返回之间**保持关联**。`any` 会切断这种关联并传染出去。**\n\n- 关联才是重点：`function first<T>(arr: T[]): T` 保证\"传 `number[]` 拿到 `number`\"，`any` 版本只能拿到 `any`，后面的代码全部失去保护。\n- 泛型在调用时（或从参数）推断，也可以显式指定 `identity<string>('a')`。\n- 泛型约束（`extends`）能缩小可用范围，让函数体内可以安全地访问属性。\n- 何时不该用泛型：类型只在**一个位置**出现、或只用于返回值而无从推断时，泛型没有意义（此时 `T` 会被推成 `unknown`）。"
+    },
+    {
+      "id": "iv-12-10",
+      "no": 12,
+      "q": "泛型约束 `extends` 怎么用？和类继承的 `extends` 是一回事吗？",
+      "a": "**答：不是一回事。类型位置的 `extends` 读作\"至少满足 / 是……的子集\"，是**约束**或**条件判断**；类/接口的 `extends` 是运行时可存在继承链的真继承。**\n\n- 约束用法：`<T extends { id: string }>` 让函数体能安全访问 `t.id`，且调用方必须传带 `id` 的东西。\n- 条件类型用法：`T extends string ? A : B` 是\"能赋给吗\"的判断，与继承无关。\n- 约束里的 `extends` 是\"至少具备这些成员\"，多出来的成员无所谓（结构化）。\n- 常见错误：想表达\"只能是这几个\"就不能用 `extends`，要用联合或 `keyof`。\n```ts\nfunction pluck<T, K extends keyof T>(obj: T, key: K): T[K] { return obj[key]; }\nconst n = pluck({ a: 1, b: 'x' }, 'a');  // number\n// pluck({ a: 1 }, 'z');                 // ❌ TS2345：'z' 不满足 keyof T\n```"
+    },
+    {
+      "id": "iv-13-11",
+      "no": 13,
+      "q": "泛型默认值怎么用？",
+      "a": "**答：`<T = string>`，类型推断不出来时用默认值兜底，规则和函数默认参数一致（后面的参数可以引用前面的类型参数）。**\n\n- 只在**无法从参数推断**时生效；有实参时以推断为准。\n- 典型用途：`class Api<T = unknown>`、`type Result<T, E = Error>`。\n- 顺序约束：**有默认值的类型参数不能出现在无默认值的类型参数之前**，否则报\"Required type parameters may not follow optional type parameters\"（这点和函数参数相反：函数里 `function f(a = 1, b: number)` 是直接报错的另一种错）。\n- 和 `infer` 配合时常用：\"提取不到就用默认\"。\n```ts\ntype Result<T, E = Error> = { ok: true; data: T } | { ok: false; error: E };\ntype Fetcher<D = unknown, P extends unknown[] = []> = (...args: P) => Promise<D>;\n```"
+    },
+    {
+      "id": "iv-14-12",
+      "no": 14,
+      "q": "函数重载怎么用？为什么推荐联合类型而不是重载？",
+      "a": "**答：重载用多个\"只写签名\"的声明 + 一个兼容的实现签名；但联合类型 + 可选/判别参数通常更简洁、推断更准，只在\"返回类型依赖输入的具体形状\"时才值得用重载。**\n\n- 重载的坑：**实现签名对调用方不可见**，实现签名内部参数类型很松（常写 `any`），容易写错而不报错。\n- 联合类型方案：`function f(x: string | number)`，签名只有一个，函数体必须显式收窄，反而更安全。\n- 真正需要重载的场景：返回类型随参数类型变化且无法用条件类型优雅表达，例如 `document.createElement('div')` 返回 `HTMLDivElement`。\n- 另一个高频词：重载解析从上到下取第一个匹配，顺序错了会吃掉后面的签名。\n```ts\n// 联合 + 条件返回类型，比重载更\"TS\"\nfunction parse(input: string): string[];\nfunction parse(input: number): number[];\nfunction parse(input: string | number) { /* ... */ }\n```\n\n**Q15: `strictFunctionTypes` 下函数参数是逆变还是双变？给个例子。**\n\n**答：对**函数类型写法**，参数位置是**逆变**（contravariant，参数可以更宽，不能更窄）；但**方法简写语法**（`m(x: T): void`）仍然是**双变**的——这是 TS 刻意保留的不健全。**\n\n- 原因：方法语法要兼容 JS 里大量\"参数更窄\"的回调（如 `Array.prototype` 与 DOM 事件），改严会破坏生态。\n- 所以同一个签名，写成属性形式和方法形式，检查严格度不同——面试里能说出这点很加分。\n```ts\ntype Fn = (a: Animal) => void;\ntype Method = { m(a: Animal): void };\n\nconst dogOnly = (d: Dog) => {};\nconst f: Fn = dogOnly;              // ❌ 逆变：参数不能更窄\nconst o: Method = { m: dogOnly };   // ✅ 双变：方法语法放行\n```\n\n- 记忆口诀：**返回值协变（可以更窄）、参数逆变（可以更宽）、方法双变**。"
+    },
+    {
+      "id": "iv-16-13",
+      "no": 16,
+      "q": "为什么回调参数类型写窄了会出问题？",
+      "a": "**答：因为库只会承诺\"我传给你的参数是它声明的那个宽类型\"，你写窄了就可能在运行时收到别的子类型，从而访问到不存在的属性而崩。**\n\n- 典型报错：`TS2345: Argument of type '(e: MouseEvent) => void' is not assignable to parameter of type '(e: Event) => void'`。\n- 正确做法：在函数体内收窄，或使用类型断言/守卫，而不是在参数位写窄类型。\n```ts\n// ❌ 不要：万一触发的是 keydown，e.key 就是 undefined\nel.addEventListener('click', (e: MouseEvent) => e.button);\n\n// ✅ 正确\nel.addEventListener('click', (e) => { if (e instanceof MouseEvent) e.button; });\n```\n\n- 反方向记忆：**函数参数是\"消费者\"，消费者能接受的越多越安全**（逆变）。"
+    },
+    {
+      "id": "iv-17-14",
+      "no": 17,
+      "q": "`this` 类型怎么标注？",
+      "a": "**答：在参数列表第一位写一个假的 `this` 参数（不占实参）：`function f(this: Window, x: number)`，它只做编译期检查、编译后消失。类里还可以用多态 `this` 返回类型。**\n\n- `this: void`：明确声明\"这个函数不依赖 this\"，防止被当方法挂载使用。\n- 多态 `this`：`class Base { set(k: string): this }`，子类调用返回子类类型，链式调用不断型。\n- 箭头函数没有自己的 `this`，也不能被标注 `this` 参数。\n- `noImplicitThis`（`strict` 附带）会在 `this` 隐式为 any 时报错。\n```ts\nfunction onClick(this: HTMLButtonElement, e: Event) { this.disabled = true; }\nclass Builder { private parts: string[] = []; add(s: string): this { this.parts.push(s); return this; } }\nclass HtmlBuilder extends Builder { render(): string { return this.parts.join(''); } }\nnew HtmlBuilder().add('a').render();   // ✅ 链式不丢类型\n```"
+    },
+    {
+      "id": "iv-18-15",
+      "no": 18,
+      "q": "什么是\"类型参数的位置\"？为什么 `function f<T>(x: T): T` 和 `function f(x: unknown): unknown` 不同？",
+      "a": "**答：类型参数出现在\"能被推断\"的位置（参数、返回值关联处），调用方传什么就保留什么；`unknown` 是固定类型，进出都丢掉信息，调用方必须自己收窄。**\n\n- `T` 让输入输出建立**双向关联**：`f(1)` 得到 `number`，`f('a')` 得到 `string`。\n- `unknown` 版本：`f(1)` 得到 `unknown`，后面的 `.toFixed()` 要自己断言。\n- 类似的\"位置\"概念还有：类型参数只出现在返回值（无法推断，需要显式指定）、出现在约束里（`K extends keyof T`）、出现在映射类型的键上。\n- 面试延伸：\"什么时候泛型会被推成 `unknown`？\" → 没有推断来源时（TS 3.5+ 默认推 `unknown` 而不是 `{}`）。\n\n**Q19: 协变、逆变、双变、不变 分别是什么？（用大白话 + 例子）**\n\n**答：讲的是\"子类型关系能不能安全传递\"。协变=可以变窄（本方向一致）、逆变=可以变宽（方向相反）、双变=两个方向都放行（不健全）、不变=一点都不许变。**\n\n- 比喻：`Dog extends Animal`。\n  - 协变：`Dog[]` 能当 `Animal[]` 用——\"一箱狗是一箱动物\"，读的时候没问题。\n  - 逆变：函数参数——\"能处理任何动物的函数\"可以替代\"只能处理狗的函数\"（前者的能力更强，换上去更安全）；反过来不行。\n  - 双变：TS 里方法参数和 `any` 相关位置是双变，为了兼容 JS 生态。\n  - 不变：`type Box<T> = { get: () => T; set: (v: T) => void }`，`Box<Dog>` 与 `Box<Animal>` 互不可赋值——一读一写，两个方向都得满足，只能不变。\n- 补充：TS 会为泛型**自动测量**变异性；由于方法语法是双变的（见 Q15），`Array` / `Set` 这类\"又能读又能写\"的容器在 TS 里比理论上更宽松，这既是数组协变的根源，也是不健全的来源。\n- 记忆：\"**读出来可以变窄（协变），写进去必须够宽（逆变），读写都有的容器只能不变**。\"\n- TS 的可变数组是**协变**的（这是刻意的妥协，见下一题）。"
+    },
+    {
+      "id": "iv-20-16",
+      "no": 20,
+      "q": "为什么数组在 TS 里是协变的？这会导致什么不健全？为什么 TS 不改？",
+      "a": "**答：为了兼容 JS 的鸭子类型使用习惯，`Dog[]` 被允许赋给 `Animal[]`；但这同时允许往里 `push` 一只 `Cat`，编译通过、运行时出错——这是 TS 著名的、被官方承认的不健全（unsoundness）。**\n```ts\nclass Animal {} class Dog extends Animal { bark() {} } class Cat extends Animal { meow() {} }\n\nconst dogs: Dog[] = [new Dog()];\nconst animals: Animal[] = dogs;        // ✅ 协变放行\nanimals.push(new Cat());               // ✅ 编译通过：animals 的类型是 Animal[]，而 Cat 也是 Animal\ndogs[0].bark();                        // 💥 运行时：这不是 Dog\n```\n\n- 为什么不改：改成不变会让几乎所有真实代码报错（`Dog[]` 传给 `Animal[]` 参数太常见），生态代价远大于收益；官方的定位是\"TS 是带类型标注的 JS，不是可靠类型系统\"，健全性让位于实用性。\n- 缓解手段：入参尽量用 `readonly T[]` / `readonly` 数组，明确\"我只读\"；`ReadonlyArray` 是协变的，安全。\n- 类似被接受的取舍还有：`any`、`as`、双变方法、`!` 非空断言。"
+    },
+    {
+      "id": "iv-21-17",
+      "no": 21,
+      "q": "可选参数和默认参数的区别？",
+      "a": "**答：`x?: number` 的类型是 `number | undefined`，函数体内必须处理 undefined；`x = 1` 的类型是 `number`，不传时用默认值，函数体内不用判空——但两者在调用方的\"可以省略\"这一点上相同。**\n\n- 默认参数在 `.d.ts` 里也表现为可选（`x?: number`），但只是\"调用可省略\"，不代表函数体内是 undefined。\n- 带默认值的参数**允许显式传 `undefined`**（会用默认值），这在做\"透传可选配置\"时很实用。\n- 可选参数必须放在必选参数之后（TS 会报错：required parameter cannot follow optional）。\n- 严格模式下 `exactOptionalPropertyTypes` 管的是**对象属性**，不影响函数参数。\n```ts\nfunction a(x?: number) { return x?.toFixed(); }   // x: number | undefined\nfunction b(x = 1) { return x.toFixed(); }          // x: number，b(undefined) 也合法\n```"
+    },
+    {
+      "id": "iv-22-18",
+      "no": 22,
+      "q": "剩余参数怎么加类型？",
+      "a": "**答：`...args: string[]` 表示任意多个字符串；要表达\"固定长度/固定位置\"就用元组类型 `...args: [string, number]` 或带展开的元组 `...args: [string, ...number[]]`。泛型场景写 `<T extends unknown[]>(...args: T)`。**\n\n- `...args: T[]` 与 `...args: T`：后者把 T 本身当数组类型（`T extends any[]`），能保留元组长度信息。\n- `readonly` 元组可以配 `as const` 一起用，做\"参数数组\"的精确转发。\n- TS 4.0 起支持**可变元组类型**（variadic tuple），`[...T, U]` 这种拼接让 `bind`/`curry` 的类型得以实现。\n```ts\ndeclare function f(...args: [string, number]): void;\nf('a', 1);\n// f('a');                 // ❌ 缺少参数\n\ndeclare function g<T extends unknown[]>(...args: T): T;\nconst r = g(1, 'a', true);   // [number, string, boolean]\n```\n\n---"
+    },
+    {
+      "id": "iv-23-19",
+      "no": 23,
+      "q": "`keyof` / `typeof` / `in` 在类型位置分别是什么意思？",
+      "a": "**答：`keyof T` = 取 T 的所有键组成的联合；`typeof x` = 取**值** x 的类型（把值提升到类型层）；`in` 在两个地方出现——映射类型的 `[K in Keys]`（遍历键）和条件/运行时的 `'a' in obj`（收窄）。**\n\n- `keyof` 作用在类型上；对索引签名会得到 `string | number`（4.4+ 对模板字面量索引是 `string`）。\n- `typeof` 只能作用在**变量/属性/函数名**上，不能写 `typeof f()` 或 `typeof {}`（表达式不行）。\n- 最常用组合：`keyof typeof obj` —— \"先把这个值转成类型，再取它的键\"，配置对象改键名时类型自动跟随。\n- 映射类型的 `[K in keyof T]` 是 `in` 的主战场；`-?` / `+readonly` 这些修饰符也写在这里。\n```ts\nconst config = { host: 'a', port: 1 };\ntype Key = keyof typeof config;      // 'host' | 'port'\ntype Value = (typeof config)[Key];   // string | number\n```"
+    },
+    {
+      "id": "iv-24-20",
+      "no": 24,
+      "q": "索引访问类型 `T[K]` 怎么用？",
+      "a": "**答：像取数组元素一样取类型的成员类型：`User['name']`、`T[keyof T]`、`Arr[number]`。它和 `keyof` 是一对——`keyof` 拿键联合，`T[K]` 拿值类型。**\n\n- `T[number]`：对数组/元组取元素类型（元组会得到联合）。\n- `T[keyof T]`：取所有属性值的联合，常用于\"这个对象可能出现的所有值的类型\"。\n- 索引访问支持泛型：`function get<T, K extends keyof T>(o: T, k: K): T[K]`。\n- 索引访问不会自动加 undefined，除非开了 `noUncheckedIndexedAccess`（那时 `T[K]` 对索引签名会附 `| undefined`）。\n```ts\ntype User = { id: number; profile: { name: string; age: number } };\ntype Name = User['profile']['name'];      // string\ntype All = User[keyof User];              // number | { name: string; age: number }\ntype Elem = string[][number];             // string\n```\n\n**Q25: 映射类型是什么？手写 `Partial<T>`。**\n\n**答：映射类型 = \"用一个类型参数遍历另一个类型的所有键，逐个生成新属性\"，语法 `{ [K in keyof T]: ... }`；它必须作用在类型上，运行时无痕迹。**\n```ts\ntype MyPartial<T> = { [K in keyof T]?: T[K] };\ntype User = { id: number; name: string };\ntype P = MyPartial<User>;   // { id?: number; name?: string }\n```\n\n- 修饰符可以加减：`+?` / `-?`（可选）、`+readonly` / `-readonly`（只读）。\n- 键可以重映射：`{ [K in keyof T as `get${Capitalize<string & K>}`]: ... }`（TS 4.1+），`as never` 可以删键。\n- 同态（homomorphic）映射（直接 `[K in keyof T]`）会**保留原属性的可选/只读修饰符**；非同态（如 `[K in SomeUnion]`）不会。\n- 同态映射作用在**联合**上会自动分发：`Partial<{ a: 1 } | { b: 2 }>` = `Partial<{ a: 1 }> | Partial<{ b: 2 }>`；非同态映射（键来自一个联合字面量）不会分发。\n\n**Q26: 手写 `Pick<T, K>` / `Omit<T, K>`。**\n\n**答：`Pick` 是\"按 K 筛选键\"的同态映射；`Omit` 是 `Pick` + 取反（用 `Exclude` 先把键排掉）。**\n```ts\ntype MyPick<T, K extends keyof T> = { [P in K]: T[P] };\n\ntype MyOmit<T, K extends keyof any> = MyPick<T, Exclude<keyof T, K"
+    },
+    {
+      "id": "iv-30-21",
+      "no": 30,
+      "q": "什么是分布式条件类型？为什么 `Exclude` 要依赖它？怎么阻止分发？",
+      "a": "**答：当条件类型的被检查方是**裸类型参数**且传入联合时，TS 会\"逐个成员判断，再把结果联合起来\"。`Exclude` 正是靠这个机制逐个键过滤。**\n```ts\ntype Distribute<T> = T extends string ? 'str' : 'other';\ntype R1 = Distribute<string | number>;    // 'str' | 'other'  分发 ✅\ntype R2 = [string | number] extends [string] ? 1 : 2;  // 2，不分发\n\n// 阻止分发的标准写法\ntype NoDistribute<T> = [T] extends [string] ? 'str' : 'other';\ntype R3 = NoDistribute<string | number>;  // 'other'\n```\n\n- 触发条件：`T` 必须是裸的（`T extends U ? ...`），不能是 `T[]`、`{ x: T }`、`[T]`。\n- `never` 也是分发的高频坑：`Distribute<never>` 得到 `never`（空联合），因为\"对每个成员判断\"没有成员。这就是 `Exclude<T, never>` 的技巧来源。\n- 实战用法：按 key 过滤、把联合映射成对象、`Uppercase` 逐成员处理模板字面量。"
+    },
+    {
+      "id": "iv-31-22",
+      "no": 31,
+      "q": "模板字面量类型是什么？`Uppercase` 怎么用？",
+      "a": "**答：模板字面量类型把字符串模板搬到类型层：`` `get${K}` ``，配合 4 个内建字符串工具类型（`Uppercase` / `Lowercase` / `Capitalize` / `Uncapitalize`）可以做键的批量改写。**\n```ts\ntype EventName = 'click' | 'focus';\ntype Handler = `on${Capitalize<EventName>}`;      // 'onClick' | 'onFocus'\n\ntype Getters<T> = {\n  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];\n};\ntype G = Getters<{ name: string; age: number }>;\n// { getName: () => string; getAge: () => number }\n```\n\n- 注意 `string & K`：`K` 可能是 `string | number | symbol`，模板字面量只接受 string 类，交叉一下能去掉 symbol/number。\n- 4 个内建只对 **ASCII** 保证正确，非 ASCII（中文、土耳其语 i）行为不保证。\n- 模板字面量也可以配 `infer` 做**字符串解析**（比如把 `'a.b.c'` 拆成路径段）。\n- 它让\"配置 key 拼错\"从运行时错误变成编译错误，是类型体操里最有实际业务价值的一类。"
+    },
+    {
+      "id": "iv-32-23",
+      "no": 32,
+      "q": "`Awaited<T>` 解决了什么问题？",
+      "a": "**答：`Awaited<T>`（TS 4.5）递归解包 Promise/thenable，拿到\"await 之后真正得到的类型\"。它替代了手写 `UnwrapPromise`，并且正确处理嵌套 Promise 和 thenable。**\n```ts\ntype A = Awaited<Promise<string>>;                  // string\ntype B = Awaited<Promise<Promise<number>>>;         // number\ntype C = Awaited<Promise<string> | number>;         // string | number\n```\n\n- 手写简易版（面试够用）：`type MyAwaited<T> = T extends PromiseLike<infer U> ? MyAwaited<U> : T;`\n- 官方 lib 版本更严谨：显式排除 `null | undefined`、用 `then` 的签名 + `infer F` 处理自定义 thenable，还要防止无限递归。\n- 实战价值：`async` 函数返回类型包装、`Promise.all` 结果类型推导、通用请求封装里保留 data 类型。"
+    },
+    {
+      "id": "iv-33-24",
+      "no": 33,
+      "q": "`Record<K, V>` 和索引签名 `[key: string]: V` 的区别？",
+      "a": "**答：`Record<K, V>` 是映射类型，键可以是**字面量联合**，因此对象必须精确包含这些键（缺一个就报错）；索引签名只声明\"任意字符串键的值类型\"，允许空对象、缺键，但所有属性必须同型。**\n\n- `Record<string, V>` 与 `{[k: string]: V}` 几乎等价；`Record<'a' | 'b', number>` 是\"必须同时有 a 和 b\"。\n- 索引签名下 `obj.anything` 都被认为存在（永远不报 TS2339），是错误掩盖源；`noUncheckedIndexedAccess` 会给它补 `| undefined`。\n- 索引签名要求所有具名属性都兼容它：`{ [k: string]: number; count: number }` 合法，写成 `name: string` 就报错——这是\"想加一个不同类型的字段\"时最容易踩的坑。\n- 想做\"固定键 + 额外任意键\"，TS 4.4+ 可以用 `Record<string, unknown> & { known: string }`，但更常见的是模式里避免混用。\n```ts\ntype A = Record<'a' | 'b', number>;\nconst a1: A = { a: 1, b: 2 };   // ✅\n// const a2: A = { a: 1 };      // ❌ TS2741 缺少属性 b\n\ntype B = { [k: string]: number };\nconst b1: B = {};               // ✅ 允许空\n```"
+    },
+    {
+      "id": "iv-34-25",
+      "no": 34,
+      "q": "`Readonly<T>` 是深只读吗？",
+      "a": "**答：不是。`Readonly<T>` 只把**第一层**属性设为只读，嵌套对象的属性仍可改。**\n\n- 深只读需要自己写递归类型 `DeepReadonly<T>`，但要注意函数、数组、Map 等特殊类型的处理（否则会把方法也变成只读属性）。\n- 只读是**编译期**约束：运行时照样能改（除非配合 `Object.freeze`），且 `Object.freeze` 也只冻结第一层。\n- 只读的实用价值：函数参数用 `readonly T[]` 表明\"不修改\"，同时让数组变成协变、调用方传 `as const` 数组也能兼容。\n- `readonly` 属性仍可在**构造函数**里赋值（和 `private readonly` 组合是依赖注入的标准写法）。\n```ts\ntype DeepReadonly<T> = {\n  readonly [K in keyof T]: T[K] extends object ? DeepReadonly<T[K]> : T[K];\n};\n\ntype R = Readonly<{ a: { b: number } }>;\ndeclare const r: R;\nr.a = { b: 1 };   // ❌ 第一层只读\nr.a.b = 2;        // ✅ 里层不设防\n```\n\n---"
+    },
+    {
+      "id": "iv-35-26",
+      "no": 35,
+      "q": "TS 的 `private` 和 JS 的 `#` 有什么区别？",
+      "a": "**答：`private` 是**编译期**的可见性标注，编译后原样保留成普通属性，运行时能被绕过；`#` 是 JS 原生的**运行时真私有**（真私有槽），编译后仍然无法从外部访问。**\n\n- 绕过 `private` 的手段：`(obj as any).secret`、`obj['secret']`、`// @ts-expect-error`；`#` 则连 `obj['#x']` 都拿不到。\n- `#` 的编译目标要求：`target: ES2022` 以上；低版本 TS 会降级为 `WeakMap` 实现（性能略差、`in` 检查语义略不同）。\n- 类型层差异：`private` 会让类变成名义类型（见 Q2）；`#` 同样要求同一声明来源。\n- 选择建议：库的公共 API 用 `private`（便于调试和重构友好的报错信息），真正需要防篡改/防序列化时用 `#`。\n- 注意 `#` 不能被 `protected`、不能被 `implements` 的接口当作成员来源去声明，也不能在参数属性里用。"
+    },
+    {
+      "id": "iv-36-27",
+      "no": 36,
+      "q": "`abstract class` 和 `interface` 该用哪个？",
+      "a": "**答：要共享**实现**、需要 `instanceof`、需要受保护的模版方法 → `abstract class`；只描述**形状**、要多个来源组合、需要零运行时开销 → `interface`。**\n\n- abstract class 是值，运行时存在（会生成构造器），可以被 `extends` 且只能单继承；interface 完全擦除，可以被多个 `implements`。\n- abstract class 可以有构造函数、字段初始化、`protected` 成员、`abstract` 方法强制子类实现。\n- 经验法则：`interface` 描述\"是什么\"，`abstract class` 提供\"怎么做\"。库里常组合：接口定义契约 + 抽象类提供骨架实现。\n- 坑：abstract class 无法被 `implements` 出多继承效果；跨包共享抽象类会引入运行时依赖和版本耦合。"
+    },
+    {
+      "id": "iv-37-28",
+      "no": 37,
+      "q": "`implements` 和 `extends` 的区别？",
+      "a": "**答：`extends` 是继承（拿实现和成员，运行时存在原型链）；`implements` 只是**检查**（类的实例形状必须满足接口，接口完全不生成代码，也不给任何实现）。**\n\n- 一个类可以 `extends` 一个父类 + `implements` 多个接口；接口之间可以互相 `extends`（多继承类型）。\n- `implements` 只检查**实例侧**（public 形状），不检查 `static` 侧、不检查构造函数签名。\n- 常见误区：`class A implements I` 后，把 A 的对象赋给 `I` 也成立——因为结构化类型，`implements` 其实不改变类型关系，只是提前校验。\n- 定义构造器形状要用 `new () => T`（或 TS 4.2+ 的 `abstract new () => T`），不能用 interface。"
+    },
+    {
+      "id": "iv-38-29",
+      "no": 38,
+      "q": "构造函数参数属性简写是什么？有什么限制？",
+      "a": "**答：在构造函数参数前加 `public` / `private` / `protected` / `readonly`，TS 会自动生成同名字段和赋值语句——这是 TS 独有语法，不是类型擦除，会生成代码。**\n```ts\nclass User {\n  constructor(public name: string, private age: number, readonly id = 1) {}\n}\n// 等价于：声明 3 个字段 + 构造器里 this.name = name 等\n```\n\n- 限制：只能用在**构造函数**里；必须有可见性修饰符或 `readonly`（否则就是普通参数）；不能用 `#` 私有名。\n- 不能和 `declare` 混用；开 `useDefineForClassFields: true`（ES2022 target 默认）时字段语义是 `defineProperty`，会**遮蔽**父类同名 getter/setter——这是升级 target 时的经典事故。\n- 面试延伸：`useDefineForClassFields` 影响字段初始化顺序和 `this` 可用性，是\"从 TS 老代码升级到 ES2022\"必须知道的一条。"
+    },
+    {
+      "id": "iv-39-30",
+      "no": 39,
+      "q": "`override` 关键字有什么用？",
+      "a": "**答：显式声明\"这个成员是在覆盖父类的成员\"，让编译器验证父类确实存在同名成员——父类改名/删除时立刻报错，避免子类方法静默失效。**\n\n- 配合 `noImplicitOverride: true` 使用：开了之后**所有**覆盖都必须写 `override`，否则报错，防止\"以为在覆盖、其实写成了新方法\"。\n- 适用范围：方法、访问器、属性（含 `static` 成员，会去父类的静态侧比对）；构造函数和接口实现的方法不能标 `override`。\n- 和 `super.method()` 的关系：`override` 只做校验，不改变调用语义；`super` 调用依然可用。\n- 只在有继承的地方有意义；接口 `implements` 的方法**不加** `override`。"
+    },
+    {
+      "id": "iv-40-31",
+      "no": 40,
+      "q": "装饰器（decorator）是什么？现在是什么状态（Stage 3 / TS 5.0 新语义）？",
+      "a": "**答：装饰器是\"用函数在类/方法/字段定义时改写它\"的语法，属于 TC39 Stage 3。TS 5.0 起默认实现**标准装饰器**（`(value, context)` 两参数），旧的实验性装饰器需要显式开 `experimentalDecorators: true`。**\n\n- 新标准装饰器签名：`(value, context)`，`context` 提供 `kind` / `name` / `static` / `private` / `access` / `addInitializer`；**可以返回值替换原值**。\n- 旧实验装饰器：`(target, key, descriptor)`，靠改 `descriptor` 生效；支持**参数装饰器**，标准里没有参数装饰器。\n- `emitDecoratorMetadata` 只有旧模式有，Angular / NestJS 目前仍依赖 `experimentalDecorators` + `emitDecoratorMetadata`。\n- 顺序：装饰器表达式自上而下求值，装饰器函数自下而上调用。\n- 应用场景：依赖注入、日志、校验、ORM 映射；但注意装饰器会引入运行时库和元数据，纯类型项目通常用不到。\n\n**Q41: 静态成员和实例成员的区别？（简单）**\n\n**答：`static` 成员挂在**构造函数**上，通过类名访问，全类共享一份；实例成员挂在原型或实例上，通过 `new` 出来的对象访问。**\n\n- 类型层：`typeof Class` 类型包含静态成员；`Class` 类型（用作注解时）只描述实例成员。\n- 所以\"接收类本身\"和\"接收实例\"要分别写 `new () => T` 和 `T`。\n- `static` 也能 `private` / `readonly`；`static` 字段用 `this` 指向类本身（在继承中会指向子类，多态 `this` 在静态侧也成立）。\n- 常见用途：工厂方法、常量、单例缓存、计数器。\n- 注意：静态成员不参与实例的结构化类型比较。"
+    },
+    {
+      "id": "iv-42-32",
+      "no": 42,
+      "q": "类的 `readonly` 和 `Object.freeze` 的区别？",
+      "a": "**答：`readonly` 是编译期限制（浅层、可被断言绕过、不生成代码）；`Object.freeze` 是运行时限制（浅层、真冻结，严格模式下再赋值会抛 TypeError）。**\n\n- 两者都是**浅**的：`readonly` 不管嵌套属性，`freeze` 也不冻结嵌套对象（要写递归 freeze）。\n- TS 的 lib 里 `Object.freeze(o)` 的返回类型是 `Readonly<T>`，所以冻结后 TS 也会禁止赋值（只要返回值被使用）。\n- `readonly` 的属性可以在构造函数中赋值一次；`freeze` 之后任何赋值在严格模式抛错（非严格模式静默失败，更危险）。\n- 想要\"运行时只读\"必须用 `freeze`；只想要\"编译期提醒\"用 `readonly`。二者常一起用。\n\n---"
+    },
+    {
+      "id": "iv-43-33",
+      "no": 43,
+      "q": "`import type` 有什么用？为什么需要它？",
+      "a": "**答：它只导入类型，编译后**整条 import 被删除**，绝不产生运行时依赖。作用是：避免运行时副作用、打断循环依赖、让打包器能安全 tree-shake、满足 `verbatimModuleSyntax` / `isolatedModules`。**\n```ts\nimport type { User } from './types';              // 编译后消失\nimport { type Config, createConfig } from './cfg'; // 混合写法\n```\n\n- 没有 `import type` 时，TS 默认会\"猜\"哪些导入只用于类型并删掉——但这个判断在单文件转译（esbuild/swc/babel）时做不到，所以那些工具会要求你写清楚（否则会保留 import 导致运行时找不到模块而崩）。\n- 循环依赖场景：只用到类型的那条边换成 `import type` 就能打断依赖环。\n- 注意：`import type` 不能导入值，也不能 `import type` 一个类后 `new` 它。"
+    },
+    {
+      "id": "iv-44-34",
+      "no": 44,
+      "q": "`verbatimModuleSyntax` 是干嘛的？",
+      "a": "**答：TS 5.0 的新开关，要求\"导入导出原样输出，不做任何改写\"：如果某个导入只当类型用，你必须显式写 `import type`，否则它会被保留成真 import。**\n\n- 它合并并取代了已废弃的 `importsNotUsedAsValues` 和 `preserveValueImports`。\n- 好处：TS 的输出与 esbuild/swc/Babel 的行为一致，避免\"TS 能跑、打包后崩\"的经典问题。\n- 代价：必须严格区分 `import type` 和 `import`，标注要补。\n- 和 `export =` / CommonJS 的交互更严格：CommonJS 文件里必须用 `import x = require('x')` 语法。\n- 新项目推荐开 `\"verbatimModuleSyntax\": true`。"
+    },
+    {
+      "id": "iv-45-35",
+      "no": 45,
+      "q": "`.d.ts` 是干嘛的？怎么给没有类型的库写声明？",
+      "a": "**答：`.d.ts` 是\"只有类型、没有实现\"的声明文件，告诉 TS 某个运行时模块/全局变量的形状。给无类型库写声明有两条路：项目内 `declare module '库名'`，或写成独立的 `@types/库名` 包。**\n```ts\n// src/types/legacy-lib.d.ts\ndeclare module 'legacy-lib' {\n  export interface Options { debug?: boolean }\n  export function init(o?: Options): void;\n  export default function main(): number;\n}\n```\n\n- 局部补丁：在项目里放一个 `*.d.ts`，只要 `include` 覆盖到就会生效。\n- 精确对应真实文件结构：也可以直接在同名文件旁写 `foo.d.ts` 与 `foo.js` 配对。\n- 面试延伸：`declare global` 用于扩展全局；`export {}` 让文件成为模块（否则 `declare` 会污染全局）。\n- 注意：`.d.ts` 默认不被 `skipLibCheck` 跳过的话会被类型检查；手写声明也常被 `skipLibCheck: true` 静默忽略掉错误。"
+    },
+    {
+      "id": "iv-46-36",
+      "no": 46,
+      "q": "TS 怎么找到类型定义？`@types/*` 和 DefinitelyTyped 是什么？",
+      "a": "**答：解析顺序大致是：显式 `types`/`typeRoots` → 包自身的 `types`/`typings` 字段或 `index.d.ts` → `node_modules/@types/<包名>`。`@types/*` 是社区为无类型包写的声明包，源码仓库叫 DefinitelyTyped，由自动化工具发布。**\n\n- `tsconfig` 的 `types: [\"node\"]` 会**限制**自动加载的全局类型（只加载列出的），常用于减小全局污染和加速编译。\n- `typeRoots` 改变\"去哪找 `@types` 目录\"，默认 `./node_modules/@types` 及向上各级。\n- `moduleResolution: \"bundler\"`（TS 5.0+，为 Vite 等项目）：读 `exports` 字段、允许省略扩展名；`node16`/`nodenext` 更贴近 Node 真实解析（需要显式扩展名 / `package.json#exports` 生效）。\n- 版本匹配：类型包版本跟主包走（`@types/react@18` 配 React 18），大版本错配会报一堆莫名其妙的错。"
+    },
+    {
+      "id": "iv-47-37",
+      "no": 47,
+      "q": "声明合并（declaration merging）是什么？有什么实际用途（比如给 Express 的 Request 加 user）？",
+      "a": "**答：同名声明会按规则合并成一个：interface 与 interface 合并成员、namespace 与 namespace/class/function/enum 合并、`declare global` 也参与合并。它是\"不改源码给第三方类型打补丁\"的唯一官方姿势。**\n```ts\n// src/types/express.d.ts\nimport 'express';\ndeclare global { namespace Express { interface Request { user?: { id: string; roles: string[] } } } }\nexport {};\n```\n\n- Express 的类型正是在 `Express.Request` 这个 namespace 里声明的，所以往同名 interface 里加成员即可全局生效。\n- 注意：文件必须**是模块**（有 `import`/`export`）才能用 `declare global`，否则报错。\n- 顺序陷阱：如果补丁文件没被 `include`，或 `@types` 解析到了另一份同名声明，会\"时而生效时而不生效\"。\n- 同名 `type` 不能合并（报 Duplicate identifier），这是 interface 的独有能力。"
+    },
+    {
+      "id": "iv-48-38",
+      "no": 48,
+      "q": "怎么给 `window` 扩展一个全局属性？",
+      "a": "**答：在模块文件里用 `declare global { interface Window { ... } }`（或 `interface Window` + `declare global`），并确保该声明文件被 `tsconfig.include` 覆盖到。**\n```ts\n// src/env.d.ts\nexport {};\ndeclare global { interface Window { __APP_VERSION__: string; grecaptcha?: { ready(cb: () => void): void } } }\n// 使用：window.__APP_VERSION__\n```\n\n- 之所以扩展 `Window` 而不是新建 interface：`window` 的类型就是 `Window & typeof globalThis`，合并进 `Window` 才生效。\n- 全局**变量**（不是 window 属性）用 `declare var` / `declare const` / `declare function`（放在非模块的 `global.d.ts` 里）。\n- Vite 项目还可以顺手声明 `import.meta.env`：扩展 `interface ImportMetaEnv` / `ImportMeta`。\n- 反面建议：全局变量是最后手段，能用模块导出就别污染全局。"
+    },
+    {
+      "id": "iv-49-39",
+      "no": 49,
+      "q": "`export =` 和 `export default` 的区别？",
+      "a": "**答：`export =` 是老的 CommonJS 导出（一个模块只导出一个值/对象，配 `import x = require('x')` 或 esModuleInterop 的默认导入）；`export default` 是 ES Module 的默认导出，两者语义和互操作性不同。**\n\n- `export =` 是 CommonJS 的\"单值导出\"（整包就是一个函数/对象），一个文件里不能与其它 `export` 共存；消费方写 `import x = require('x')`，或在 `esModuleInterop` 下用默认导入。\n- 互操作性开关：`esModuleInterop: true` + `allowSyntheticDefaultImports` 让 `import express from 'express'` 能用在 CJS 类型包上。\n- 写过 `.d.ts` 都会遇到：`export = Foo` 的包想用 `import { bar } from 'pkg'` 会报\"此模块只能在使用 esModuleInterop 时默认导入\"。\n- 现代选择：库代码尽量 `export default`/具名导出，`export =` 只在与老包/纯 CJS 打交道时出现。"
+    },
+    {
+      "id": "iv-50-40",
+      "no": 50,
+      "q": "循环依赖怎么产生的？怎么排查？",
+      "a": "**答：A 引用 B、B 又引用 A（直接或间接）就形成循环。Node/CJS 下会拿到\"半初始化\"的模块导出（undefined），TS 编译通常不报错，所以表现为运行时的诡异 undefined。**\n\n- 常见触发：index 桶文件互相 re-export、常量文件和工具函数互相引用、基类/子类分属两个文件。\n- 类型层的解法：把只用于类型的那条边改成 `import type`，依赖环在编译后就被打断（这是最实用的手法）。\n- 排查工具：`madge --circular --extensions ts src`、`dependency-cruiser`、`eslint-plugin-import` 的 `no-cycle`；CJS 运行时可 `node --trace-warnings` / 看 `require` 顺序。\n- 结构层解法：抽公共模块（shared/types）、避免桶文件 re-export 全部、把\"接口\"与\"实现\"分离。\n\n---"
+    },
+    {
+      "id": "iv-51-41",
+      "no": 51,
+      "q": "`tsconfig.json` 里 `target` / `lib` / `module` / `moduleResolution` 分别管什么？",
+      "a": "**答：`target` 决定**语法降级**到哪个 ES 版本（影响 class 字段语义、`#` 私有实现、async 降级）；`lib` 决定**能用哪些内置类型声明**（DOM/ES2022 等）；`module` 决定**产出的模块格式**；`moduleResolution` 决定**怎么找模块文件**。**\n\n- `target: \"ES2022\"` 是现代 Node/浏览器的合理默认；`target` 影响 `useDefineForClassFields` 的默认值——这是最容易被忽略的连带效应。\n- `lib` 不写时按 target 推断，而且**默认包含 DOM**——Node 项目一定要显式写 `[\"ES2023\"]`，否则 `document` 也能通过编译，等到运行时才炸。\n- Node 24 场景推荐：`module: \"nodenext\"` + `moduleResolution: \"nodenext\"`；Vite/打包器场景：`module: \"esnext\"` + `moduleResolution: \"bundler\"`。\n- `moduleResolution` 选择错误会报\"找不到模块 X 的声明文件\"——90% 的 `TS2307` 都源自它或路径映射问题。\n\n**Q52: `strict` 打开了哪些开关？逐个说。**\n\n**答：`strict: true` 是九个开关的合集开关（TS 5.9）：`noImplicitAny`、`strictNullChecks`、`strictFunctionTypes`、`strictBindCallApply`、`strictPropertyInitialization`、`noImplicitThis`、`alwaysStrict`、`useUnknownInCatchVariables`，以及 5.6 起加入的 `strictBuiltinIteratorReturn`。**\n\n- `noImplicitAny`：隐式 any 报错（参数没标注、`let x;` 后当 any 用）。\n- `strictNullChecks`：`null`/`undefined` 不再属于所有类型，需显式处理。\n- `strictFunctionTypes`：函数类型参数逆变检查（方法语法除外，见 Q15）。\n- `strictBindCallApply`：`bind`/`call`/`apply` 的参数类型被检查。\n- `strictPropertyInitialization`：类字段必须在构造器里初始化或在声明处赋值。\n- `noImplicitThis`：`this` 隐式 any 报错。\n- `alwaysStrict`：输出 `\"use strict\"`，且所有代码按严格模式解析。\n- `useUnknownInCatchVariables`：`catch (e)` 的 `e` 是 `unknown` 而不是 `any`。\n- `strictBuiltinIteratorReturn`（5.6）：内置迭代器（如 `Map.prototype.values()`）的 `next().value` 在有 `done` 检查时类型更精确。\n- **注意：`strict` 不包含** `noUncheckedIndexedAccess`、`exactOptionalPropertyTypes`、`noImplicitOverride`、`noUnusedLocals`"
+    },
+    {
+      "id": "iv-53-42",
+      "no": 53,
+      "q": "`strictNullChecks` 解决了什么问题？",
+      "a": "**答：在没有它的时候，`null` 和 `undefined` 可以赋给任何类型（包括 `string`），号称\"十亿美元错误\"；开启后它们成为独立的类型，必须显式声明\"可以是空\"并在使用前收窄。**\n\n- 开启后 `const s: string = null` 直接报错，逼迫你写 `string | null` 并在访问前判空。\n- 对可选属性、可选参数、数组索引、`Map.get()` 的返回值都有影响（`Map.get` 变成 `V | undefined`）。\n- 副产物：`?.`、`??`、`!`（非空断言）成为必备工具；但 `!` 只是\"我保证非空\"，用多了等于关掉这层保护。\n- 迁移现实：这是 `strict` 家族里**破坏性最大**的一项，老项目常单独先关着，靠 `strictNullChecks` 单开逐步推进。\n```ts\nfunction len(s?: string) {\n  // return s.length;            // ❌ TS18048\n  return s?.length ?? 0;         // ✅\n}\n```"
+    },
+    {
+      "id": "iv-54-43",
+      "no": 54,
+      "q": "`noUncheckedIndexedAccess` 是干嘛的？为什么推荐开？",
+      "a": "**答：它让所有\"索引访问\"的结果都附带 `| undefined`（数组下标、索引签名、`Record<string, T>` 的取值），强制你在取值后判空——因为索引越界或键不存在在运行时真的会返回 undefined。**\n\n- 不开启时 `arr[999]` 被当作 `T`，是最普遍的\"编译期撒谎\"来源之一。\n- 开启后代码会变啰嗦，常见缓解方式：用 `for...of` / `.map()` 代替下标循环、把值取到局部变量后判空、必要处用 `!` 并写注释说明为什么安全。\n- 注意它对**元组**不生效（元组已知每个位置一定存在）。\n- 它是独立的开关，**不随 `strict` 开启**；新项目建议开，老项目按模块渐进开（可用 `// @ts-nocheck` 临时豁免）。"
+    },
+    {
+      "id": "iv-55-44",
+      "no": 55,
+      "q": "`exactOptionalPropertyTypes` 是干嘛的？",
+      "a": "**答：它把\"可选属性\"和\"属性值可以是 undefined\"区分开：`{ a?: string }` 不再允许写入 `{ a: undefined }`，只能整个省略 a。**\n\n- 不开时 `a?: string` 等价于 `string | undefined`，`{ a: undefined }` 合法；开启后这个赋值报 `TS2375/TS2379`。\n- 需要\"显式传 undefined\"就要写成 `a?: string | undefined`。\n- 它依赖 `strictNullChecks`，且和索引签名、`Partial<T>` 的交互会让代码变吵（`Partial<T>` 的语义也随之变严）。\n- 业务价值：序列化/`Object.keys` 遍历/`in` 判断/`JSON.stringify` 时，\"字段存在但值为 undefined\"和\"字段不存在\"语义完全不同，这个开关能挡住一类真实 bug。"
+    },
+    {
+      "id": "iv-56-45",
+      "no": 56,
+      "q": "Vite / esbuild / swc 会做类型检查吗？为什么 CI 要单独跑 `tsc --noEmit`？",
+      "a": "**答：不会。它们是\"转译器\"，只做语法擦除和降级，**不做类型检查**——这是它们快的原因。所以 CI 必须单独跑 `tsc --noEmit`（或 `vue-tsc` / `tsc -b`）来把关类型。**\n\n- Vite dev 时按需转译，错误只在编辑器/IDE 里显示；不跑 tsc 就可能在类型全错的情况下构建成功。\n- 判断标准：esbuild/swc/babel 都是**单文件**处理，而类型检查需要跨文件语义分析，天然做不了。\n- 相关的坑：`isolatedModules` / `verbatimModuleSyntax` 就是为了让\"单文件转译\"与\"TS 官方编译\"行为一致而存在的开关。\n- 推荐流水线：`tsc --noEmit`（类型）→ eslint（风格/规则）→ 测试 → 打包；想加速可用 `incremental` / `tsc -b`，或用 TS 7（Go 版）做检查。"
+    },
+    {
+      "id": "iv-57-46",
+      "no": 57,
+      "q": "`skipLibCheck` 该不该开？",
+      "a": "**答：生产项目建议开 `true`。它跳过所有 `.d.ts` 的类型检查，能显著加快编译并避免第三方类型包互相冲突导致的报错。**\n\n- 代价：你自己手写的 `.d.ts` 里的类型错误也会被跳过（语法错误仍会报），需要心里有数。\n- 典型场景：两个 `@types/*` 包依赖不同版本的 `@types/node`，冲突报错满天飞——`skipLibCheck: true` 是社区标准解法。\n- 它**不**影响你项目里 `.ts` 文件的检查质量（因为那些不是 lib 文件）。\n- 反方观点：库作者/对声明质量有极致要求的团队会关掉它，以便发现自己导出的 `.d.ts` 有问题；发布前跑一次 `tsc --noEmit` 而不开 skipLibCheck 是常见折中。"
+    },
+    {
+      "id": "iv-58-47",
+      "no": 58,
+      "q": "`.ts` 和 `.d.ts` 和 `.tsx` 分别什么时候用？",
+      "a": "**答：`.ts` 是普通 TS 源码；`.d.ts` 是只含类型声明的文件（不产出 JS，用于给 JS/第三方模块描述类型）；`.tsx` 是含 JSX 的 TS 源码。**\n\n- `.d.ts` 里不能有实现（`declare` 语句、类型别名、`export` 声明为主）；它必须与同名 `.js` 或包入口对应才能被自动关联。\n- `.tsx` 的代价：尖括号断言 `<Foo>x` 不可用（会被当 JSX），泛型箭头函数要写 `<T,>(x: T) => x` 或 `<T extends unknown>`。\n- 还有 `.mts` / `.cts`（对应 ESM/CJS，`module: nodenext` 下自动决定模块格式）和 `.d.mts` / `.d.cts`。\n- 索引/入口类型放 `index.d.ts`；全局类型补丁放 `src/types/*.d.ts` 并确保被 `include`。"
+    },
+    {
+      "id": "iv-59-48",
+      "no": 59,
+      "q": "怎么从 JS 项目渐进迁移到 TS？",
+      "a": "**答：靠 `allowJs` + `checkJs` 让 JS 也在类型系统里跑，用 `// @ts-check` 单文件试点，新代码先 TS，老代码逐步重命名，`strict` 逐个开关推进，绝不一次性全绿。**\n\n- 第一步：加 `tsconfig.json`，开 `allowJs: true`、`checkJs: false`、`noEmit: true`，先把 `tsc --noEmit` 跑起来看规模（`--generateTrace` 或先只 include 一个目录）。\n- 第二步：新文件一律 `.ts`；老 `.js` 用 JSDoc 标注（`/** @param {string} s */`），享受 80% 的类型收益且不改文件后缀。\n- 第三步：按模块/目录批量改名，改一个修一个；`strictNullChecks` 和 `noImplicitAny` 常最后开（破坏性最大）。\n- 加速手段：`ts-migrate` 之类工具自动补 `any` 占位 + `// @ts-expect-error`，然后按清单逐条还债。\n- 原则：**迁移期的目标不是\"零错误\"，而是\"新增代码不再产生技术债\"**，并给存量加预算和进度看板。"
+    },
+    {
+      "id": "iv-60-49",
+      "no": 60,
+      "q": "`@ts-expect-error` 和 `@ts-ignore` 的区别？为什么推荐前者？",
+      "a": "**答：`@ts-expect-error` 在\"下一行确实有错误\"时静默通过，在\"下一行没有错误\"时报 `TS2578 Unused '@ts-expect-error' directive`；`@ts-ignore` 无论有没有错误都无条件压掉。**\n\n- 因此 `@ts-expect-error` 是\"自带过期检测的抑制\"：代码修好之后它会主动报错提醒你删掉它，避免残留的抑制悄悄掩盖未来的新错误。\n- 使用规范：必须紧跟下一行、写清原因（`// @ts-expect-error 第三方类型定义错误，已在 issue #123 跟进`），并优先考虑用类型守卫/声明补丁替代。\n- 另一个新选择：`@ts-expect-error` 无法定位\"错误在第几行\"时用 `// @ts-expect-error: reason` 加说明；`@ts-nocheck` 则整文件关闭（迁移时用，别留在主干）。\n- 面试补充：这三个都是注释指令，编译输出里会被保留吗？——会被保留（注释不擦除），但 `@ts-nocheck` 只影响 TS 检查，不影响运行时。\n\n---\n\n## 第二部分 · 白板手写题（10 题 + 3 题读代码）\n\n> 默写纪律：先写签名（泛型约束），再想\"遍历还是判断\"，最后补 `infer`。全部实现都只用 1~2 行。"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+// tsconfig.strict-max.jsonc
+// ============================================================================
+// 第 08 章配套：安全增强项"全开"版配置
+//
+// 说明：JSON 本身不支持注释，所以本文件用 .jsonc 扩展名（带注释的 JSON）。
+//      tsc 能直接读 .jsonc 吗？—— tsc 默认只找 tsconfig.json / jsconfig.json，
+//      但你可以显式指定：npx tsc -p tsconfig.strict-max.jsonc
+//      TS 5.9 的配置解析器能正确处理 jsonc 注释和尾逗号。
+//
+// 用法：把它当作"抄作业的模板"，按需把里面的项搬进你自己的 tsconfig.json。
+//      不要盲目全抄——noUnusedLocals 这类项会让"开发中途的半成品代码"也报错。
+// ============================================================================
+{
+  "compilerOptions": {
+    // ---------------------------------------------------------------- 语言环境
+    // target: 生成的 JS 语法降到哪个 ECMAScript 版本。
+    //   不开（默认 ES5）会怎样：async/await 被编译成状态机、class 变函数、
+    //   可选链被展开成一堆三元表达式，产物又长又慢，调试时看到的 JS 跟源码对不上。
+    //   注意：target 只影响"语法降级"，它"附带"决定默认 lib，但不会限制你用哪个 API。
+    "target": "ES2022",
+
+    // lib: 允许你使用哪些"内置类型声明"（Array / Promise / Map / DOM ...）。
+    //   不开（默认取 target，ES2022）会怎样：想用 ES2023 才加进来的
+    //   Array.prototype.findLast() 会报 TS2550。
+    //   注意 "ES2023" 不等于 "包好了 DOM"，写浏览器代码还要加 "DOM"。
+    "lib": ["ES2023"],
+
+    // module / moduleResolution: 产物模块格式 + tsc 解析 import 路径的规则。
+    //   这两个必须成对理解，写 Node 服务用 NodeNext，写前端交给打包器用 Bundler。
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    // ------------------------------------------------- strict 总开关（8 项）
+    // strict: 一次性打开下面 8 个开关的"套餐"。关掉它 =
+    //   strictNullChecks / noImplicitAny / strictFunctionTypes /
+    //   strictBindCallApply / strictPropertyInitialization / noImplicitThis /
+    //   useUnknownInCatchVariables / alwaysStrict 全部回到"宽松模式"。
+    //   不开会怎样：null 能塞进任何类型、未声明的参数变 any，等你上线才发现。
+    "strict": true,
+
+    // -------------------------------------------------- 隐藏关卡（不在 strict 里）
+    // noUncheckedIndexedAccess: 下标访问一律加 undefined。
+    //   不开会怎样：const first: number = arr[0] 编译通过，运行时 arr 为空 → undefined，
+    //   下一行 .toFixed() 直接 TypeError: Cannot read properties of undefined。
+    "noUncheckedIndexedAccess": true,
+
+    // exactOptionalPropertyTypes: 区分"{ timeout?: number }"和"{ timeout?: number | undefined }"。
+    //   不开会怎样：{ timeout: undefined } 会被当成合法的 { timeout?: number }，
+    //   于是 ?? 兜底逻辑失效（?? 只在 null/undefined 时兜底，但 undefined 已经被"合法化"了）。
+    "exactOptionalPropertyTypes": true,
+
+    // noImplicitOverride: 子类重写父类方法必须写 override。
+    //   不开会怎样：父类改名/删方法后，子类那个"同名方法"悄悄变成了新方法，
+    //   你以为还在重写，实际已经跟父类脱钩了。
+    "noImplicitOverride": true,
+
+    // noFallthroughCasesInSwitch: switch 的 case 不许"穿透"到下一个 case。
+    //   不开会怎样：漏写 break 不报错，代码继续往下执行，逻辑诡异且极难查。
+    "noFallthroughCasesInSwitch": true,
+
+    // noPropertyAccessFromIndexSignature: 索引签名只能用 obj['key'] 访问，不许 obj.key。
+    //   不开会怎样：obj.key 看起来像"已知字段"，实际它是任意字符串键，
+    //   拼错字段名编译器不吭声，运行时拿到 undefined。
+    "noPropertyAccessFromIndexSignature": true,
+
+    // verbatimModuleSyntax: 类型导入必须写 import type，否则原样保留。
+    //   不开会怎样：只用来当类型的 import 被当成运行时导入，Node 去找那个
+    //   根本不存在的运行时导出 → ERR_MODULE_NOT_FOUND；打包器也不好做 tree-shaking。
+    "verbatimModuleSyntax": true,
+
+    // isolatedModules: 保证"单文件转译"与"全项目类型检查"结果一致。
+    //   不开会怎样：esbuild / swc / Vite 每次只看到一个文件，遇到
+    //   "re-export 了一个类型"这种需要上下文才能判断的语法就抓瞎，
+    //   于是同一份代码 tsc 通过、打包器报错（或反之）。
+    "isolatedModules": true,
+
+    // ------------------------------------------------------------ 容易踩的"严格但吵"
+    // noUnusedLocals: 声明了没用的局部变量直接报错。
+    //   ⚠️ 开发中途写一半的代码也会被打断，赶进度的话可以先不开，用 ESLint 提醒。
+    "noUnusedLocals": true,
+
+    // noUnusedParameters: 没用的函数参数直接报错。
+    //   ⚠️ 重写回调、实现接口时经常要"占位参数"，这时得写 _ 前缀才能过。
+    "noUnusedParameters": true,
+
+    // noImplicitReturns: 函数不是所有分支都有 return 就报错。
+    //   不开会怎样：一个分支忘了 return，函数在某些输入下悄悄返回 undefined，
+    //   调用方以为拿到的是对象，实际是 undefined。
+    "noImplicitReturns": true,
+
+    // -------------------------------------------------------------- 模块互操作
+    // allowImportingTsExtensions: 允许 import './util.ts' 写全后缀。
+    //   前提是配合 noEmit 或 rewriteRelativeImportExtensions，因为浏览器/Node
+    //   的 ESM 需要真实存在的文件后缀，而 tsc 输出的产物里后缀不会自动补。
+    "allowImportingTsExtensions": true,
+
+    // esModuleInterop: 让 import fs from 'fs' 这种默认导入写法能正常工作。
+    //   不开会怎样：CommonJS 模块没有 default 导出，默认导入拿到的是整个 module.exports
+    //   对象位置错位，运行时 undefined。现代项目几乎必开。
+    "esModuleInterop": true,
+
+    // resolveJsonModule: 允许 import data from './data.json'，并给它推断类型。
+    //   不开会怎样：TS2307 Cannot find module './data.json'。
+    "resolveJsonModule": true,
+
+    // ------------------------------------------------------------ 性能与一致性
+    // skipLibCheck: 跳过 node_modules 里 .d.ts 的类型检查。
+    //   不开会怎样：两个第三方库的 .d.ts 互相打架，报错出现在 node_modules 里，
+    //   你既改不了也不想改，CI 直接红。大型项目几乎全开。
+    "skipLibCheck": true,
+
+    // forceConsistentCasingInFileNames: 文件大小写必须完全一致。
+    //   不开会怎样：macOS / Windows 上 './Utils.ts' 能跑，Linux CI 上就找不到文件。
+    "forceConsistentCasingInFileNames": true,
+
+    // ---------------------------------------------------------------- 产物相关
+    // noEmit: 只做类型检查，不吐 JS。
+    //   现代项目里构建交给 Vite / esbuild / swc，tsc 只当"检查器"。
+    "noEmit": true
+  },
+
+  // include: 哪些文件进"类型检查范围"。用 glob 写，** 表示任意层子目录。
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts"],
+
+  // exclude: 从 include 的结果里剔除。
+  //   不写默认是 ["node_modules", "bower_components", "jspm_packages"] + outDir。
+  "exclude": ["node_modules", "dist", "coverage"],
+
+  // files: 精确点名，不写 glob，不做自动扩展。一般只用来指定入口。
+  // files 和 include 可以同时存在，最终集合 = files ∪ include - exclude。
+
+  // extends: 继承另一份配置，后面写的覆盖前面的。
+  //   "extends": "./tsconfig.base.json"
+}
