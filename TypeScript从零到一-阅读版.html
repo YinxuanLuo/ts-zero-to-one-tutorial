@@ -161,6 +161,14 @@
   <a class="nav-chapter" href="#ch-11">11-面试速查表</a>
   <div class="nav-subs"><a class="nav-sub" href="#ch-11::第一部分-高频面试题-60-问" data-target="第一部分-高频面试题-60-问">第一部分 · 高频面试题 60 问</a><a class="nav-sub" href="#ch-11::第二部分-白板手写题-10-题-3-题读代码" data-target="第二部分-白板手写题-10-题-3-题读代码">第二部分 · 白板手写题（10 题 + 3 题读代码）</a><a class="nav-sub" href="#ch-11::第三部分-一页速查表" data-target="第三部分-一页速查表">第三部分 · 一页速查表</a><a class="nav-sub" href="#ch-11::第四部分-面试技巧" data-target="第四部分-面试技巧">第四部分 · 面试技巧</a></div>
 </div>
+<div class="nav-group">
+  <a class="nav-chapter" href="#ch-12">12-装饰器与元编程（附录）</a>
+  <div class="nav-subs"><a class="nav-sub" href="#ch-12::a-0-前置说明-正文示例-vs-本章示例" data-target="a-0-前置说明-正文示例-vs-本章示例">A.0 前置说明：正文示例 vs 本章示例</a><a class="nav-sub" href="#ch-12::本章目录" data-target="本章目录">📋 本章目录</a><a class="nav-sub" href="#ch-12::a-1-装饰器基础" data-target="a-1-装饰器基础">A.1 装饰器基础</a><a class="nav-sub" href="#ch-12::a-2-装饰器类型详解" data-target="a-2-装饰器类型详解">A.2 装饰器类型详解</a><a class="nav-sub" href="#ch-12::a-3-类装饰器" data-target="a-3-类装饰器">A.3 类装饰器</a><a class="nav-sub" href="#ch-12::a-4-方法装饰器" data-target="a-4-方法装饰器">A.4 方法装饰器</a><a class="nav-sub" href="#ch-12::a-5-属性装饰器" data-target="a-5-属性装饰器">A.5 属性装饰器</a><a class="nav-sub" href="#ch-12::a-6-参数装饰器" data-target="a-6-参数装饰器">A.6 参数装饰器</a><a class="nav-sub" href="#ch-12::a-7-装饰器工厂" data-target="a-7-装饰器工厂">A.7 装饰器工厂</a><a class="nav-sub" href="#ch-12::a-8-元编程实战" data-target="a-8-元编程实战">A.8 元编程实战</a><a class="nav-sub" href="#ch-12::装饰器速查表" data-target="装饰器速查表">📊 装饰器速查表</a><a class="nav-sub" href="#ch-12::装饰器注意事项" data-target="装饰器注意事项">⚠️ 装饰器注意事项</a><a class="nav-sub" href="#ch-12::实战练习" data-target="实战练习">💪 实战练习</a><a class="nav-sub" href="#ch-12::下一步" data-target="下一步">⏭️ 下一步</a></div>
+</div>
+<div class="nav-group">
+  <a class="nav-chapter" href="#ch-内容">内容校验与补全报告</a>
+  <div class="nav-subs"><a class="nav-sub" href="#ch-内容::一-结论速览" data-target="一-结论速览">一、结论速览</a><a class="nav-sub" href="#ch-内容::二-逐条对照-用户提示词要求-vs-现状" data-target="二-逐条对照-用户提示词要求-vs-现状">二、逐条对照：用户提示词要求 vs 现状</a><a class="nav-sub" href="#ch-内容::三-本次新增交付物" data-target="三-本次新增交付物">三、本次新增交付物</a><a class="nav-sub" href="#ch-内容::四-校验证据-可复现" data-target="四-校验证据-可复现">四、校验证据（可复现）</a><a class="nav-sub" href="#ch-内容::五-现有内容的质量观察-无需修改" data-target="五-现有内容的质量观察-无需修改">五、现有内容的质量观察（无需修改）</a><a class="nav-sub" href="#ch-内容::六-使用建议" data-target="六-使用建议">六、使用建议</a><a class="nav-sub" href="#ch-内容::附录-用户原始提示词" data-target="附录-用户原始提示词">附录：用户原始提示词</a></div>
+</div>
   </nav>
   <main id="content">
 <section class="chapter" id="ch-readme" data-title="README.md">
@@ -183,7 +191,7 @@
 <tbody><tr>
 <td><strong>文件</strong></td>
 <td><a href="#ch-quick">速通版-2小时上手TypeScript.md</a></td>
-<td><a href="docs/"><code>docs/</code></a> 目录下 12 章</td>
+<td><a href="docs/"><code>docs/</code></a> 目录下 12 章 + 1 篇附录</td>
 </tr>
 <tr>
 <td><strong>读完要多久</strong></td>
@@ -210,13 +218,27 @@
 <p>两套内容不冲突——速通版每个小节末尾都有 <code>→ 深入：第 XX 章</code> 的路标。</p>
 <h3 id="想要更好的阅读体验">📖 想要更好的阅读体验？</h3>
 <p>打开根目录下的 <strong><a href="TypeScript%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80-%E9%98%85%E8%AF%BB%E7%89%88.html"><code>TypeScript从零到一-阅读版.html</code></a></strong>。</p>
-<p>这是一个<strong>完全自包含的单文件</strong>（双击即可，不需要装任何东西、不联网），把全部 12 章 + 速通版合在一起，并且带：</p>
+<p>这是一个<strong>完全自包含的单文件</strong>（双击即可，不需要装任何东西、不联网），把全部 12 章 + 附录 + 速通版合在一起，并且带：</p>
 <ul>
 <li>左侧<strong>侧边栏导航</strong>（章节 + 每章二级标题，滚动时自动展开当前章）</li>
 <li>顶部<strong>搜索框</strong>（实时过滤目录）</li>
 <li>阅读<strong>进度条</strong> + 回到顶部按钮</li>
 <li><strong>打印友好</strong>（打印时自动隐藏侧边栏，每章分页）</li>
 </ul>
+<p><strong>✍️ 想要真的动手练？</strong></p>
+<p>打开 <strong><a href="TypeScript%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80-%E7%BB%83%E4%B9%A0%E7%AB%99.html"><code>TypeScript从零到一-练习站.html</code></a></strong>。</p>
+<p>同样是<strong>完全自包含的单文件</strong>（66 KB，双击即用、离线可答），把教程里的题变成了可交互的练习：</p>
+<ul>
+<li><strong>第一关 · 判断对错（20 题）</strong>：点&quot;对/错&quot;即时判分，显示解析 + &quot;回看第 XX 章&quot;标签</li>
+<li><strong>第二关 · 说出类型（25 题）</strong>：先自己写答案，再点&quot;查看答案&quot;对照</li>
+<li><strong>错题本</strong>：答错的题自动收集，带出处章节，可单题重做</li>
+<li><strong>面试速查（约 50 题）</strong>：可折叠 + 关键词实时搜索，先自答再展开对答案</li>
+<li><strong>进度条 + 正确率统计</strong>，进度存在浏览器里，关掉再开还在</li>
+</ul>
+<blockquote>
+<p>建议顺序：先读速通版把环境跑起来 → 读 00–05 章时同步做第一关 → 读 06 章后做第二关 →
+清空错题本 → 面试前刷面试速查。</p>
+</blockquote>
 <p>改过正文想重新生成？见 <a href="#ch-readme"><code>tools/</code></a>。</p>
 <hr>
 <h2 id="二-完整版路线图-约-1520-小时">二、完整版路线图（约 15~20 小时）</h2>
@@ -315,8 +337,15 @@
 <td>随时查</td>
 <td>60 道高频题 + 白板手写题 + 一页速查</td>
 </tr>
+<tr>
+<td><a href="#ch-12">A</a></td>
+<td><strong>附录：装饰器与元编程</strong></td>
+<td>1282 行</td>
+<td>60 min</td>
+<td>正文刻意跳过的语法（需 <code>tsc</code> + <code>experimentalDecorators</code>）；NestJS / Angular 面试常问</td>
+</tr>
 </tbody></table>
-<p><strong>总计 17,000+ 行正文（约 693 KB）。</strong> 如果你只想要最短路径，用上面的速通版；
+<p><strong>总计 18,000+ 行正文（约 730 KB）。</strong> 如果你只想要最短路径，用上面的速通版；
 如果时间只够读完整版的几章，急救顺序是 <code>00 → 02 → 04 → 05 → 10 的题目</code>——
 这 5 份能覆盖日常写业务代码 85% 的场景。</p>
 <hr>
@@ -427,12 +456,16 @@ SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]:
 <td>📖 <strong>单文件 HTML 阅读版</strong>，带侧边栏/搜索/打印，双击即看</td>
 </tr>
 <tr>
+<td><a href="TypeScript%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%80-%E7%BB%83%E4%B9%A0%E7%AB%99.html">TypeScript从零到一-练习站.html</a></td>
+<td>✍️ <strong>单文件交互练习站</strong>，45 道自测题 + 50 道面试题，即时判分、错题本、进度保存</td>
+</tr>
+<tr>
 <td><a href="#ch-quick">速通版-2小时上手TypeScript.md</a></td>
 <td>🚀 2 小时路线，含 20 道自测题</td>
 </tr>
 <tr>
 <td><code>docs/</code></td>
-<td>📚 完整版 12 章正文</td>
+<td>📚 完整版 12 章正文 + 1 篇装饰器附录</td>
 </tr>
 <tr>
 <td><code>examples/</code></td>
@@ -444,7 +477,7 @@ SyntaxError [ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX]:
 </tr>
 <tr>
 <td><code>tools/</code></td>
-<td>生成 HTML 阅读版 + 仓库自检脚本，见 <a href="#ch-readme">tools/README.md</a></td>
+<td>生成 HTML 阅读版 + 练习站 + 仓库自检脚本，见 <a href="#ch-readme">tools/README.md</a></td>
 </tr>
 </tbody></table>
 <h3 id="正文-docs">正文（<code>docs/</code>）</h3>
@@ -16445,6 +16478,1463 @@ type OmitThisParameter&lt;T&gt; = unknown extends ThisParameterType&lt;T&gt; ? T
 <hr>
 <blockquote>
 <p><strong>最后一晚的收尾清单</strong>：① 60 问的加粗答案行过一遍；② 默写 10 个工具类型；③ 背 10 个报错码；④ 准备 1 个真实踩坑故事 + 2 个反问问题。第二天只看 3.1~3.5 的表格。</p>
+</blockquote>
+
+</section>
+<section class="chapter" id="ch-12" data-title="docs\12-装饰器与元编程（附录）.md">
+<h1 id="附录-a-装饰器与元编程">附录 A：装饰器与元编程</h1>
+<blockquote>
+<p><strong>为什么这一章是「附录」？</strong></p>
+<p>正文 00–11 章刻意跳过了装饰器。原因是正文所有示例都用 <strong>Node 原生类型擦除</strong>（<code>node xxx.ts</code> 直接跑）执行，
+而类型擦除模式受 <code>erasableSyntaxOnly</code> 约束：凡是带有<strong>运行时语义</strong>的语法——装饰器、<code>enum</code>、构造函数参数属性、
+<code>namespace</code>——都不被允许。这不是偷懒，是 TypeScript 5.8+ 的硬性规则。</p>
+<p>但装饰器在 NestJS、Angular、TypeORM、Swagger 这类框架里天天出现，面试也常问。
+所以把它作为附录补上：<strong>读这一章需要你用 <code>tsc</code> 编译（而不是原生直跑），并且打开 <code>experimentalDecorators</code>。</strong></p>
+<p>本章内容取自作者更早的一份 TypeScript 教程（原 <code>typescript-tutorial</code> 仓库）的第六章——
+那个仓库与本文正文高度重合、仅此章独有，现已并入此处统一维护。小节编号沿用原来的 <code>A.x</code>，便于对照。</p>
+</blockquote>
+<hr>
+<h2 id="a-0-前置说明-正文示例-vs-本章示例">A.0 前置说明：正文示例 vs 本章示例</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>正文 00–11 章</th>
+<th>本附录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运行方式</td>
+<td><code>node 01-心智模型.ts</code>（原生类型擦除）</td>
+<td>需 <code>tsc</code> 编译后运行，或 <code>tsx</code> / <code>ts-node</code></td>
+</tr>
+<tr>
+<td>tsconfig</td>
+<td><code>erasableSyntaxOnly: true</code></td>
+<td>必须关掉它，并开 <code>experimentalDecorators: true</code></td>
+</tr>
+<tr>
+<td>能用装饰器吗</td>
+<td>❌ 会直接报错</td>
+<td>✅ 本附录的主题</td>
+</tr>
+<tr>
+<td>能用 enum 吗</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>换句话说：正文教你写<strong>能被 Node 直接执行</strong>的现代 TS；这一章教你写<strong>需要编译期处理</strong>的那部分 TS。
+两者不冲突，是你以后读 NestJS / Angular 源码的必备前置。</p>
+</blockquote>
+<hr>
+<h2 id="本章目录">📋 本章目录</h2>
+<ul>
+<li><a href="#a1-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%9F%BA%E7%A1%80">A.1 装饰器基础</a></li>
+<li><a href="#a2-%E8%A3%85%E9%A5%B0%E5%99%A8%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3">A.2 装饰器类型详解</a></li>
+<li><a href="#a3-%E7%B1%BB%E8%A3%85%E9%A5%B0%E5%99%A8">A.3 类装饰器</a></li>
+<li><a href="#a4-%E6%96%B9%E6%B3%95%E8%A3%85%E9%A5%B0%E5%99%A8">A.4 方法装饰器</a></li>
+<li><a href="#a5-%E5%B1%9E%E6%80%A7%E8%A3%85%E9%A5%B0%E5%99%A8">A.5 属性装饰器</a></li>
+<li><a href="#a6-%E5%8F%82%E6%95%B0%E8%A3%85%E9%A5%B0%E5%99%A8">A.6 参数装饰器</a></li>
+<li><a href="#a7-%E8%A3%85%E9%A5%B0%E5%99%A8%E5%B7%A5%E5%8E%82">A.7 装饰器工厂</a></li>
+<li><a href="#a8-%E5%85%83%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98">A.8 元编程实战</a></li>
+</ul>
+<hr>
+<h2 id="a-1-装饰器基础">A.1 装饰器基础</h2>
+<h3 id="a-1-1-什么是装饰器">A.1.1 什么是装饰器？</h3>
+<pre><code class="language-typescript">// 装饰器是一种特殊类型的声明，可以附加到类、方法、属性或参数上
+// 装饰器使用 @decoratorName 语法，应用到目标上
+
+// 开启装饰器支持
+// tsconfig.json: { &quot;experimentalDecorators&quot;: true }
+
+// 基本语法
+@sealed
+class Person {
+  @readonly
+  name: string;
+  
+  @log
+  greet() {
+    console.log(&quot;Hello!&quot;);
+  }
+}
+</code></pre>
+<h3 id="a-1-2-装饰器工作原理图解">A.1.2 装饰器工作原理图解</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────────┐
+│                         装饰器工作原理                               │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│   @decorator                              function decorator()      │
+│       │                                           │                 │
+│       ↓                                           ↓                 │
+│   ┌────────┐                                 ┌──────────────┐        │
+│   │Target │ ──────────────────────────────→ │   Wrapped    │        │
+│   │ 原始   │                                 │   Target     │        │
+│   │ Class │                                 │   增强版     │        │
+│   └────────┘                                 └──────────────┘        │
+│                                                                     │
+│   装饰器在类定义时执行，而不是运行时                                   │
+│   可以修改类的行为、添加元数据、验证等                                 │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="a-1-3-装饰器求值顺序">A.1.3 装饰器求值顺序</h3>
+<pre><code class="language-typescript">// 装饰器执行顺序（从上到下）
+// 多个同类型装饰器应用于同一目标时，从下到上执行
+
+// 1. 参数装饰器、方法装饰器、访问器装饰器、属性装饰器应用到每个实例成员
+// 2. 参数装饰器、方法装饰器、访问器装饰器、属性装饰器应用到每个静态成员
+// 3. 参数装饰器应用到构造函数
+// 4. 类装饰器应用到类
+
+// 实际顺序示例
+@ClassDecorator1   // 2. 类装饰器最后执行（从上往下）
+@ClassDecorator2   // 1. 类装饰器先执行（从下往上）
+class MyClass {
+  @PropertyDecorator1  // 4. 属性装饰器最后
+  @PropertyDecorator2  // 3. 属性装饰器先执行
+  
+  @MethodDecorator1  // 6. 方法装饰器最后
+  @MethodDecorator2  // 5. 方法装饰器先执行
+  myMethod() {}
+}
+</code></pre>
+<h3 id="a-1-4-装饰器配置">A.1.4 装饰器配置</h3>
+<pre><code class="language-json">// tsconfig.json
+{
+  &quot;compilerOptions&quot;: {
+    &quot;experimentalDecorators&quot;: true,      // 启用装饰器
+    &quot;emitDecoratorMetadata&quot;: true       // 发射装饰器元数据（用于依赖注入）
+  }
+}
+</code></pre>
+<hr>
+<h2 id="a-2-装饰器类型详解">A.2 装饰器类型详解</h2>
+<h3 id="a-2-1-装饰器签名">A.2.1 装饰器签名</h3>
+<pre><code class="language-typescript">// 1. 类装饰器
+declare type ClassDecorator = &lt;TFunction extends Function&gt;(
+  target: TFunction
+) =&gt; TFunction | void;
+
+// 2. 方法装饰器
+declare type MethodDecorator = &lt;T&gt;(
+  target: Object,
+  propertyKey: string | symbol,
+  descriptor: TypedPropertyDescriptor&lt;T&gt;
+) =&gt; TypedPropertyDescriptor&lt;T&gt; | void;
+
+// 3. 属性装饰器
+declare type PropertyDecorator = (
+  target: Object,
+  propertyKey: string | symbol
+) =&gt; void;
+
+// 4. 参数装饰器
+declare type ParameterDecorator = (
+  target: Object,
+  propertyKey: string | symbol,
+  parameterIndex: number
+) =&gt; void;
+
+// 5. 访问器装饰器（get/set）
+declare type AccessorDecorator = &lt;T&gt;(
+  target: Object,
+  propertyKey: string | symbol,
+  descriptor: TypedPropertyDescriptor&lt;T&gt;
+) =&gt; TypedPropertyDescriptor&lt;T&gt; | void;
+</code></pre>
+<h3 id="a-2-2-typedpropertydescriptor">A.2.2 TypedPropertyDescriptor</h3>
+<pre><code class="language-typescript">// TypedPropertyDescriptor是方法/访问器描述符的类型
+interface TypedPropertyDescriptor&lt;T&gt; {
+  enumerable?: boolean;
+  configurable?: boolean;
+  writable?: boolean;
+  value?: T;
+  get?: () =&gt; T;
+  set?: (value: T) =&gt; void;
+}
+
+// 使用示例：方法装饰器
+function memoize&lt;T&gt;(
+  target: any,
+  key: string,
+  descriptor: TypedPropertyDescriptor&lt;T&gt;
+) {
+  if (descriptor.value) {
+    const originalMethod = descriptor.value;
+    const cache = new Map();
+    
+    descriptor.value = function(...args: any[]) {
+      const key = JSON.stringify(args);
+      if (cache.has(key)) {
+        return cache.get(key);
+      }
+      const result = originalMethod.apply(this, args);
+      cache.set(key, result);
+      return result;
+    };
+  }
+  return descriptor;
+}
+</code></pre>
+<hr>
+<h2 id="a-3-类装饰器">A.3 类装饰器</h2>
+<h3 id="a-3-1-基本类装饰器">A.3.1 基本类装饰器</h3>
+<pre><code class="language-typescript">// 类装饰器接收构造函数作为参数
+function sealed(target: Function) {
+  Object.seal(target);
+  Object.seal(target.prototype);
+}
+
+// 添加属性或方法
+function addTimestamp&lt;T extends { new (...args: any[]): {} }&gt;(target: T) {
+  return class extends target {
+    createdAt = new Date();
+    updatedAt = new Date();
+  };
+}
+
+@addTimestamp
+class Person {
+  name: string;
+  
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+const person = new Person(&quot;张三&quot;);
+console.log((person as any).createdAt);  // 当前时间
+</code></pre>
+<h3 id="a-3-2-装饰器修改类">A.3.2 装饰器修改类</h3>
+<pre><code class="language-typescript">// 记录类的创建
+function logClass(target: any) {
+  console.log(`Class ${target.name} was defined`);
+  
+  // 添加静态属性
+  target.classId = Math.random().toString(36).substr(2, 9);
+  
+  // 添加静态方法
+  target.create = function(...args: any[]) {
+    return new target(...args);
+  };
+  
+  return target;
+}
+
+@logClass
+class User {
+  constructor(public name: string, public age: number) {}
+}
+
+console.log(User.classId);  // 随机ID
+const user = User.create(&quot;张三&quot;, 25);
+</code></pre>
+<h3 id="a-3-3-类装饰器工厂">A.3.3 类装饰器工厂</h3>
+<pre><code class="language-typescript">// 装饰器工厂：返回装饰器的函数
+function classDecoratorFactory(config: { prefix?: string; suffix?: string }) {
+  return function&lt;T extends { new (...args: any[]): {} }&gt;(target: T) {
+    return class extends target {
+      prefix = config.prefix ?? &quot;&quot;;
+      suffix = config.suffix ?? &quot;&quot;;
+      
+      getDisplayName() {
+        return `${this.prefix}${super.name || &quot;Unknown&quot;}${this.suffix}`;
+      }
+    };
+  };
+}
+
+@classDecoratorFactory({ prefix: &quot;[USER] &quot;, suffix: &quot; ★&quot; })
+class Account {
+  name: string;
+  
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+const account = new Account(&quot;VIP用户&quot;);
+console.log((account as any).getDisplayName());  // &quot;[USER] VIP用户 ★&quot;
+</code></pre>
+<h3 id="a-3-4-单例模式装饰器">A.3.4 单例模式装饰器</h3>
+<pre><code class="language-typescript">// 单例装饰器
+function Singleton&lt;T extends { new (...args: any[]): {} }&gt;(target: T) {
+  let instance: T | null = null;
+  
+  return class SingletonClass {
+    private static _instance: T | null = null;
+    
+    constructor(...args: any[]) {
+      if (!SingletonClass._instance) {
+        SingletonClass._instance = new target(...args);
+      }
+      return SingletonClass._instance;
+    }
+    
+    static getInstance(): T {
+      if (!SingletonClass._instance) {
+        throw new Error(&quot;Instance not initialized&quot;);
+      }
+      return SingletonClass._instance;
+    }
+  };
+}
+
+@Singleton
+class Database {
+  constructor(public connectionString: string) {}
+  
+  query(sql: string) {
+    console.log(`Querying: ${sql}`);
+  }
+}
+
+const db1 = new Database(&quot;mongodb://localhost&quot;);
+const db2 = new Database(&quot;mysql://localhost&quot;);
+
+console.log(db1 === db2);  // true
+db1.query(&quot;SELECT * FROM users&quot;);
+</code></pre>
+<hr>
+<h2 id="a-4-方法装饰器">A.4 方法装饰器</h2>
+<h3 id="a-4-1-基本方法装饰器">A.4.1 基本方法装饰器</h3>
+<pre><code class="language-typescript">// 方法装饰器应用于类的方法
+function methodDecorator(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+): PropertyDescriptor {
+  const originalMethod = descriptor.value;
+  
+  descriptor.value = function(...args: any[]) {
+    console.log(`Calling ${methodName} with args:`, args);
+    const result = originalMethod.apply(this, args);
+    console.log(`Method ${methodName} returned:`, result);
+    return result;
+  };
+  
+  return descriptor;
+}
+
+class Calculator {
+  @methodDecorator
+  add(a: number, b: number): number {
+    return a + b;
+  }
+}
+
+const calc = new Calculator();
+calc.add(2, 3);
+// 输出:
+// Calling add with args: [2, 3]
+// Method add returned: 5
+</code></pre>
+<h3 id="a-4-2-方法防抖装饰器">A.4.2 方法防抖装饰器</h3>
+<pre><code class="language-typescript">// 防抖装饰器
+function debounce(wait: number) {
+  return function(
+    target: any,
+    methodName: string,
+    descriptor: PropertyDescriptor
+  ) {
+    const originalMethod = descriptor.value;
+    let timeoutId: ReturnType&lt;typeof setTimeout&gt;;
+    
+    descriptor.value = function(...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() =&gt; {
+        originalMethod.apply(this, args);
+      }, wait);
+    };
+    
+    return descriptor;
+  };
+}
+
+class SearchService {
+  @debounce(300)
+  search(query: string) {
+    console.log(`Searching for: ${query}`);
+  }
+}
+</code></pre>
+<h3 id="a-4-3-缓存装饰器">A.4.3 缓存装饰器</h3>
+<pre><code class="language-typescript">// 记忆化/缓存装饰器
+function memoize(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  const cache = new Map&lt;string, any&gt;();
+  
+  descriptor.value = function(...args: any[]) {
+    const key = JSON.stringify(args);
+    
+    if (cache.has(key)) {
+      console.log(`Cache hit for: ${key}`);
+      return cache.get(key);
+    }
+    
+    const result = originalMethod.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+  
+  return descriptor;
+}
+
+class MathService {
+  @memoize
+  fibonacci(n: number): number {
+    console.log(`Computing fibonacci(${n})`);
+    if (n &lt;= 1) return n;
+    return this.fibonacci(n - 1) + this.fibonacci(n - 2);
+  }
+}
+
+const math = new MathService();
+math.fibonacci(5);  // 计算
+math.fibonacci(5);  // 缓存命中
+</code></pre>
+<h3 id="a-4-4-类型检查装饰器">A.4.4 类型检查装饰器</h3>
+<pre><code class="language-typescript">// 方法参数类型检查装饰器
+function validateParams(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  
+  descriptor.value = function(...args: any[]) {
+    const paramTypes = Reflect.getMetadata(&quot;design:paramtypes&quot;, target, methodName);
+    
+    for (let i = 0; i &lt; args.length; i++) {
+      const expectedType = paramTypes[i];
+      const actualType = typeof args[i];
+      
+      if (expectedType &amp;&amp; args[i] !== null &amp;&amp; args[i] !== undefined) {
+        if (actualType !== &quot;object&quot; &amp;&amp; actualType !== expectedType.name.toLowerCase()) {
+          // 基础类型检查
+          if (typeof args[i] !== expectedType.name.toLowerCase()) {
+            console.warn(`Parameter ${i} type mismatch. Expected ${expectedType.name}, got ${actualType}`);
+          }
+        }
+      }
+    }
+    
+    return originalMethod.apply(this, args);
+  };
+  
+  return descriptor;
+}
+
+class UserService {
+  @validateParams
+  createUser(name: string, age: number): User {
+    return { name, age };
+  }
+}
+</code></pre>
+<hr>
+<h2 id="a-5-属性装饰器">A.5 属性装饰器</h2>
+<h3 id="a-5-1-基本属性装饰器">A.5.1 基本属性装饰器</h3>
+<pre><code class="language-typescript">// 属性装饰器应用于类的属性
+function format(formatString: string) {
+  return function(target: any, propertyKey: string) {
+    // 可以在属性上存储元数据
+    Reflect.defineMetadata(&quot;format&quot;, formatString, target, propertyKey);
+  };
+}
+
+class Person {
+  @format(&quot;uppercase&quot;)
+  name: string = &quot;john doe&quot;;
+}
+
+const person = new Person();
+const formatStr = Reflect.getMetadata(&quot;format&quot;, person, &quot;name&quot;);
+console.log(formatStr);  // &quot;uppercase&quot;
+</code></pre>
+<h3 id="a-5-2-观察者装饰器">A.5.2 观察者装饰器</h3>
+<pre><code class="language-typescript">// 观察者装饰器 - 属性变化时通知
+function observable(target: any, propertyKey: string) {
+  const privateKey = Symbol(propertyKey);
+  
+  Object.defineProperty(target, propertyKey, {
+    get() {
+      return this[privateKey];
+    },
+    set(value: any) {
+      const oldValue = this[privateKey];
+      this[privateKey] = value;
+      
+      if (oldValue !== value) {
+        console.log(`Property ${String(propertyKey)} changed: ${oldValue} → ${value}`);
+        this[`on${capitalize(String(propertyKey))}Changed`]?.(value, oldValue);
+      }
+    },
+    enumerable: true,
+    configurable: true
+  });
+}
+
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+class Product {
+  @observable
+  price: number = 0;
+  
+  onPriceChanged(newValue: number, oldValue: number) {
+    console.log(`Price changed from ${oldValue} to ${newValue}`);
+  }
+}
+
+const product = new Product();
+product.price = 100;  // Price changed from 0 to 100
+product.price = 150;  // Price changed from 100 to 150
+</code></pre>
+<h3 id="a-5-3-必填检查装饰器">A.5.3 必填检查装饰器</h3>
+<pre><code class="language-typescript">// 必填属性检查装饰器
+function required(
+  target: Object,
+  propertyKey: string | symbol,
+  descriptor?: PropertyDescriptor
+) {
+  if (descriptor) {
+    // 参数装饰器
+    return descriptor;
+  }
+  
+  // 属性装饰器 - 标记为必填
+  Reflect.defineMetadata(&quot;required&quot;, true, target, propertyKey);
+  
+  return {
+    get() {
+      return this[`_${String(propertyKey)}`];
+    },
+    set(value: any) {
+      if (value === undefined || value === null) {
+        throw new Error(`${String(propertyKey)} is required`);
+      }
+      this[`_${String(propertyKey)}`] = value;
+    }
+  };
+}
+
+// 类装饰器 - 验证所有必填属性
+function validate&lt;T extends { new (...args: any[]): {} }&gt;(target: T) {
+  return class extends target {
+    constructor(...args: any[]) {
+      super(...args);
+      
+      const requiredProps = Reflect.getMetadataKeys(target.prototype)
+        .filter(key =&gt; Reflect.getMetadata(&quot;required&quot;, target.prototype, key));
+      
+      for (const prop of requiredProps) {
+        const value = (this as any)[prop];
+        if (value === undefined || value === null) {
+          throw new Error(`Property ${String(prop)} is required`);
+        }
+      }
+    }
+  };
+}
+
+@validate
+class User {
+  @required
+  name!: string;
+  
+  @required
+  email!: string;
+  
+  age?: number;
+}
+
+// const user = new User();  // Error: name is required
+</code></pre>
+<hr>
+<h2 id="a-6-参数装饰器">A.6 参数装饰器</h2>
+<h3 id="a-6-1-基本参数装饰器">A.6.1 基本参数装饰器</h3>
+<pre><code class="language-typescript">// 参数装饰器
+function paramDecorator(
+  target: Object,
+  methodName: string | symbol,
+  parameterIndex: number
+) {
+  console.log(`Parameter at index ${parameterIndex} in ${String(methodName)}`);
+}
+
+class Example {
+  method(@paramDecorator param1: string, param2: number) {
+    console.log(param1, param2);
+  }
+}
+</code></pre>
+<h3 id="a-6-2-依赖注入装饰器">A.6.2 依赖注入装饰器</h3>
+<pre><code class="language-typescript">// 简单的依赖注入容器
+const injectMetadataKey = Symbol(&quot;inject&quot;);
+
+function inject(token: any) {
+  return function(
+    target: Object,
+    propertyKey: string | symbol,
+    parameterIndex: number
+  ) {
+    Reflect.defineMetadata(injectMetadataKey, { token, parameterIndex }, target, propertyKey);
+  };
+}
+
+// DI容器
+class Container {
+  private services = new Map();
+  
+  register(token: any, instance: any) {
+    this.services.set(token, instance);
+  }
+  
+  resolve&lt;T&gt;(target: any, propertyKey: string | symbol): T {
+    const metadata = Reflect.getMetadata(injectMetadataKey, target, propertyKey);
+    if (metadata) {
+      return this.services.get(metadata.token);
+    }
+    return null as T;
+  }
+}
+
+const container = new Container();
+
+// 使用
+class UserService {
+  getUser() {
+    return { name: &quot;张三&quot; };
+  }
+}
+
+container.register(UserService, new UserService());
+
+class UserController {
+  constructor(
+    @inject(UserService) private userService: UserService
+  ) {}
+}
+</code></pre>
+<h3 id="a-6-3-参数验证装饰器">A.6.3 参数验证装饰器</h3>
+<pre><code class="language-typescript">// 参数验证装饰器
+function minLength(min: number) {
+  return function(
+    target: Object,
+    methodName: string | symbol,
+    parameterIndex: number
+  ) {
+    const metadataKey = `validate_minlength_${String(methodName)}_${parameterIndex}`;
+    Reflect.defineMetadata(metadataKey, min, target, methodName);
+  };
+}
+
+function validate(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  
+  descriptor.value = function(...args: any[]) {
+    const paramTypes = Reflect.getMetadata(&quot;design:paramtypes&quot;, target, methodName);
+    
+    for (let i = 0; i &lt; args.length; i++) {
+      const metadataKey = `validate_minlength_${methodName}_${i}`;
+      const minLength = Reflect.getMetadata(metadataKey, target, methodName);
+      
+      if (minLength !== undefined &amp;&amp; typeof args[i] === &quot;string&quot; &amp;&amp; args[i].length &lt; minLength) {
+        throw new Error(`Parameter ${i} must be at least ${minLength} characters`);
+      }
+    }
+    
+    return originalMethod.apply(this, args);
+  };
+  
+  return descriptor;
+}
+
+class Service {
+  @validate
+  greet(@minLength(3) name: string) {
+    console.log(`Hello, ${name}!`);
+  }
+}
+</code></pre>
+<hr>
+<h2 id="a-7-装饰器工厂">A.7 装饰器工厂</h2>
+<h3 id="a-7-1-什么是装饰器工厂">A.7.1 什么是装饰器工厂</h3>
+<pre><code class="language-typescript">// 装饰器工厂：返回装饰器的函数
+// 允许传递配置参数
+
+// 简单工厂
+function colored(color: string) {
+  return function(target: Function) {
+    target.prototype.color = color;
+  };
+}
+
+// 复杂工厂
+function createDecorator(options: {
+  prefix?: string;
+  suffix?: string;
+  validate?: boolean;
+}) {
+  return function&lt;T extends { new (...args: any[]): {} }&gt;(target: T) {
+    return class extends target {
+      prefix = options.prefix ?? &quot;&quot;;
+      suffix = options.suffix ?? &quot;&quot;;
+      validate = options.validate ?? false;
+    };
+  };
+}
+
+// 使用
+@colored(&quot;red&quot;)
+class A {}
+
+@createDecorator({ prefix: &quot;[INFO] &quot;, suffix: &quot; ★&quot;, validate: true })
+class B {}
+</code></pre>
+<h3 id="a-7-2-装饰器组合">A.7.2 装饰器组合</h3>
+<pre><code class="language-typescript">// 多个装饰器可以组合使用
+// 等价于从下到上执行
+
+@classDecorator1
+@classDecorator2
+class MyClass {}
+
+// 等价于
+MyClass = classDecorator1(classDecorator2(MyClass));
+</code></pre>
+<h3 id="a-7-3-实际应用-日志装饰器组合">A.7.3 实际应用：日志装饰器组合</h3>
+<pre><code class="language-typescript">// 组合多个装饰器
+
+// 日志装饰器
+function log(prefix: string = &quot;&quot;) {
+  return function(
+    target: any,
+    methodName: string,
+    descriptor: PropertyDescriptor
+  ) {
+    const originalMethod = descriptor.value;
+    
+    descriptor.value = function(...args: any[]) {
+      console.log(`${prefix}[${methodName}] Called with:`, args);
+      const result = originalMethod.apply(this, args);
+      console.log(`${prefix}[${methodName}] Result:`, result);
+      return result;
+    };
+    
+    return descriptor;
+  };
+}
+
+// 性能监控装饰器
+function timing(target: any, methodName: string, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  
+  descriptor.value = function(...args: any[]) {
+    const start = performance.now();
+    const result = originalMethod.apply(this, args);
+    const duration = performance.now() - start;
+    console.log(`[TIMING] ${methodName} took ${duration.toFixed(2)}ms`);
+    return result;
+  };
+  
+  return descriptor;
+}
+
+// 错误处理装饰器
+function catchError(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  
+  descriptor.value = function(...args: any[]) {
+    try {
+      return originalMethod.apply(this, args);
+    } catch (error) {
+      console.error(`[ERROR] ${methodName}:`, error);
+      throw error;
+    }
+  };
+  
+  return descriptor;
+}
+
+// 组合使用
+class ApiService {
+  @log(&quot;[API]&quot;)
+  @timing
+  @catchError
+  async fetchUser(id: string) {
+    // 实现...
+    return { id, name: &quot;张三&quot; };
+  }
+}
+</code></pre>
+<hr>
+<h2 id="a-8-元编程实战">A.8 元编程实战</h2>
+<h3 id="a-8-1-反射元数据">A.8.1 反射元数据</h3>
+<pre><code class="language-typescript">// 需要安装reflect-metadata
+// npm install reflect-metadata
+
+import &quot;reflect-metadata&quot;;
+
+const metadataKey = Symbol(&quot;design:type&quot;);
+
+// 定义元数据
+Reflect.defineMetadata(metadataKey, &quot;string&quot;, Person.prototype, &quot;name&quot;);
+
+// 获取元数据
+const type = Reflect.getMetadata(metadataKey, Person.prototype, &quot;name&quot;);
+
+// 内置元数据键
+// design:type - 属性类型
+// design:paramtypes - 参数类型
+// design:returntype - 返回类型
+
+class Person {
+  name: string;
+  age: number;
+  
+  greet(message: string): string {
+    return `${this.name} says: ${message}`;
+  }
+}
+
+const typeMeta = Reflect.getMetadata(&quot;design:type&quot;, Person.prototype, &quot;name&quot;);
+const paramMeta = Reflect.getMetadata(&quot;design:paramtypes&quot;, Person.prototype, &quot;greet&quot;);
+const returnMeta = Reflect.getMetadata(&quot;design:returntype&quot;, Person.prototype, &quot;greet&quot;);
+
+console.log(typeMeta);   // [Function: String]
+console.log(paramMeta);   // [Function: String]
+console.log(returnMeta);  // [Function: String]
+</code></pre>
+<h3 id="a-8-2-简单的orm装饰器">A.8.2 简单的ORM装饰器</h3>
+<pre><code class="language-typescript">import &quot;reflect-metadata&quot;;
+
+// 表名装饰器
+function Table(name: string) {
+  return function&lt;T extends { new (...args: any[]): {} }&gt;(target: T) {
+    Reflect.defineMetadata(&quot;table:name&quot;, name, target);
+    return target;
+  };
+}
+
+// 列装饰器工厂
+function Column(options: {
+  name?: string;
+  type?: string;
+  primaryKey?: boolean;
+  nullable?: boolean;
+}) {
+  return function(target: any, propertyKey: string) {
+    const columns = Reflect.getMetadata(&quot;table:columns&quot;, target.constructor) || [];
+    columns.push({
+      name: options.name ?? propertyKey,
+      propertyKey,
+      type: options.type ?? &quot;string&quot;,
+      primaryKey: options.primaryKey ?? false,
+      nullable: options.nullable ?? false
+    });
+    Reflect.defineMetadata(&quot;table:columns&quot;, columns, target.constructor);
+  };
+}
+
+// 生成SQL
+function generateInsert&lt;T&gt;(entity: T): string {
+  const tableName = Reflect.getMetadata(&quot;table:name&quot;, entity.constructor);
+  const columns = Reflect.getMetadata(&quot;table:columns&quot;, entity.constructor) || [];
+  
+  const columnNames = columns.map(c =&gt; c.name).join(&quot;, &quot;);
+  const values = columns.map(c =&gt; {
+    const value = (entity as any)[c.propertyKey];
+    return typeof value === &quot;string&quot; ? `&#39;${value}&#39;` : value;
+  }).join(&quot;, &quot;);
+  
+  return `INSERT INTO ${tableName} (${columnNames}) VALUES (${values});`;
+}
+
+// 使用
+@Table(&quot;users&quot;)
+class User {
+  @Column({ name: &quot;id&quot;, type: &quot;int&quot;, primaryKey: true })
+  id!: number;
+  
+  @Column({ name: &quot;name&quot;, nullable: false })
+  name!: string;
+  
+  @Column({ name: &quot;email&quot;, nullable: false })
+  email!: string;
+  
+  @Column({ name: &quot;created_at&quot;, type: &quot;datetime&quot; })
+  createdAt!: Date;
+}
+
+const user = new User();
+user.id = 1;
+user.name = &quot;张三&quot;;
+user.email = &quot;zhangsan@example.com&quot;;
+user.createdAt = new Date();
+
+console.log(generateInsert(user));
+// INSERT INTO users (id, name, email, created_at) VALUES (1, &#39;张三&#39;, &#39;zhangsan@example.com&#39;, &#39;2024-01-01T00:00:00.000Z&#39;);
+</code></pre>
+<h3 id="a-8-3-验证装饰器系统">A.8.3 验证装饰器系统</h3>
+<pre><code class="language-typescript">import &quot;reflect-metadata&quot;;
+
+const validatorsKey = Symbol(&quot;validators&quot;);
+
+interface ValidationRule {
+  validate(value: any): boolean;
+  message: string;
+}
+
+// 验证器装饰器工厂
+function Validator(rule: ValidationRule) {
+  return function(target: any, propertyKey: string) {
+    const validators = Reflect.getMetadata(validatorsKey, target, propertyKey) || [];
+    validators.push(rule);
+    Reflect.defineMetadata(validatorsKey, validators, target, propertyKey);
+  };
+}
+
+// 内置验证器
+const MinLength = (min: number) =&gt; Validator({
+  validate: (v: string) =&gt; v.length &gt;= min,
+  message: `Minimum length is ${min}`
+});
+
+const MaxLength = (max: number) =&gt; Validator({
+  validate: (v: string) =&gt; v.length &lt;= max,
+  message: `Maximum length is ${max}`
+});
+
+const Pattern = (regex: RegExp) =&gt; Validator({
+  validate: (v: string) =&gt; regex.test(v),
+  message: `Does not match pattern ${regex}`
+});
+
+const Required = () =&gt; Validator({
+  validate: (v: any) =&gt; v !== null &amp;&amp; v !== undefined &amp;&amp; v !== &quot;&quot;,
+  message: &quot;This field is required&quot;
+});
+
+// 验证函数
+function validate(target: any): Record&lt;string, string[]&gt; {
+  const errors: Record&lt;string, string[]&gt; = {};
+  
+  for (const key of Object.keys(target)) {
+    const validators: ValidationRule[] = Reflect.getMetadata(validatorsKey, target, key) || [];
+    const value = (target as any)[key];
+    
+    for (const validator of validators) {
+      if (!validator.validate(value)) {
+        if (!errors[key]) errors[key] = [];
+        errors[key].push(validator.message);
+      }
+    }
+  }
+  
+  return errors;
+}
+
+// 使用
+class User {
+  @Required()
+  @MinLength(3)
+  @MaxLength(20)
+  username!: string;
+  
+  @Required()
+  @Pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+  email!: string;
+}
+
+const user = new User();
+user.username = &quot;ab&quot;;  // 太短
+user.email = &quot;invalid-email&quot;;
+
+const errors = validate(user);
+console.log(errors);
+// {
+//   username: [&quot;Minimum length is 3&quot;],
+//   email: [&quot;Does not match pattern ...&quot;]
+// }
+</code></pre>
+<h3 id="a-8-4-路由装饰器-模拟express-koa">A.8.4 路由装饰器（模拟Express/Koa）</h3>
+<pre><code class="language-typescript">import &quot;reflect-metadata&quot;;
+
+// HTTP方法装饰器工厂
+const methodDecoratorFactory = (method: string) =&gt; {
+  return (path: string) =&gt; {
+    return function(
+      target: any,
+      propertyKey: string,
+      descriptor: PropertyDescriptor
+    ) {
+      const routes = Reflect.getMetadata(&quot;routes&quot;, target.constructor) || [];
+      routes.push({ method, path, handler: propertyKey });
+      Reflect.defineMetadata(&quot;routes&quot;, routes, target.constructor);
+    };
+  };
+};
+
+const Get = methodDecoratorFactory(&quot;GET&quot;);
+const Post = methodDecoratorFactory(&quot;POST&quot;);
+const Put = methodDecoratorFactory(&quot;PUT&quot;);
+const Delete = methodDecoratorFactory(&quot;DELETE&quot;);
+
+// 中间件装饰器
+const Use = function(middleware: Function) {
+  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const middlewares = Reflect.getMetadata(&quot;middlewares&quot;, target.constructor) || [];
+    middlewares.push(middleware);
+    Reflect.defineMetadata(&quot;middlewares&quot;, middlewares, target.constructor);
+  };
+};
+
+// 路由类
+class UserRouter {
+  @Get(&quot;/users&quot;)
+  getUsers() {
+    return [&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;];
+  }
+  
+  @Get(&quot;/users/:id&quot;)
+  getUser(@Param(&quot;id&quot;) id: string) {
+    return { id, name: &quot;张三&quot; };
+  }
+  
+  @Post(&quot;/users&quot;)
+  createUser(@Body() body: any) {
+    return { id: 1, ...body };
+  }
+  
+  @Put(&quot;/users/:id&quot;)
+  updateUser(@Param(&quot;id&quot;) id: string, @Body() body: any) {
+    return { id, ...body };
+  }
+  
+  @Delete(&quot;/users/:id&quot;)
+  deleteUser(@Param(&quot;id&quot;) id: string) {
+    return { success: true };
+  }
+}
+
+// 参数装饰器
+function Param(name: string) {
+  return function(target: any, propertyKey: string, parameterIndex: number) {
+    // 存储参数信息
+  };
+}
+
+function Body() {
+  return function(target: any, propertyKey: string, parameterIndex: number) {};
+}
+
+// 创建路由器
+function createRouter(routerClass: any) {
+  const instance = new routerClass();
+  const routes = Reflect.getMetadata(&quot;routes&quot;, routerClass) || [];
+  
+  return {
+    match(method: string, path: string) {
+      const route = routes.find(r =&gt; 
+        r.method === method &amp;&amp; matchPath(r.path, path)
+      );
+      
+      if (route) {
+        return {
+          handler: instance[route.handler].bind(instance),
+          params: extractParams(route.path, path)
+        };
+      }
+      
+      return null;
+    }
+  };
+}
+
+// 简单的路径匹配
+function matchPath(pattern: string, path: string): boolean {
+  const regex = pattern.replace(/:(\w+)/g, &quot;([^/]+)&quot;);
+  return new RegExp(`^${regex}$`).test(path);
+}
+
+function extractParams(pattern: string, path: string): Record&lt;string, string&gt; {
+  const regex = pattern.replace(/:(\w+)/g, &quot;([^/]+)&quot;);
+  const match = path.match(new RegExp(`^${regex}$`));
+  const paramNames = pattern.match(/:(\w+)/g)?.map(p =&gt; p.slice(1)) || [];
+  
+  const params: Record&lt;string, string&gt; = {};
+  paramNames.forEach((name, i) =&gt; {
+    params[name] = match?.[i + 1] || &quot;&quot;;
+  });
+  
+  return params;
+}
+
+// 使用
+const router = createRouter(UserRouter);
+const route1 = router.match(&quot;GET&quot;, &quot;/users&quot;);
+const route2 = router.match(&quot;GET&quot;, &quot;/users/123&quot;);
+
+console.log(route1?.handler());  // [&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;]
+console.log(route2?.params);    // { id: &quot;123&quot; }
+</code></pre>
+<hr>
+<h2 id="装饰器速查表">📊 装饰器速查表</h2>
+<pre><code>┌─────────────────────────────────┬────────────────────────────────────┐
+│ 装饰器                          │ 说明                               │
+├─────────────────────────────────┼────────────────────────────────────┤
+│ @sealed                         │ 密封类                             │
+│ @override                       │ 方法重写检查                       │
+│ @deprecated                     │ 标记废弃                           │
+│ @readonly                       │ 属性只读                           │
+│ @log                            │ 日志记录                           │
+│ @memoize                        │ 缓存结果                           │
+│ @debounce(wait)                 │ 防抖                               │
+│ @throttle(wait)                 │ 节流                               │
+│ @required                       │ 必填验证                           │
+│ @autobind                       │ 自动绑定this                       │
+│ @validate                       │ 参数验证                           │
+│ @inject(token)                  │ 依赖注入                           │
+│ @route(path)                    │ 路由定义                           │
+│ @get/post/put/delete(path)      │ HTTP方法                           │
+└─────────────────────────────────┴────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="装饰器注意事项">⚠️ 装饰器注意事项</h2>
+<pre><code class="language-typescript">// 1. 装饰器是实验性功能，需要开启
+// tsconfig.json: &quot;experimentalDecorators&quot;: true
+
+// 2. 装饰器不能装饰函数（只能装饰声明）
+// @decorator
+// function fn() {}  // Error
+
+// 3. 装饰器在编译时执行，不影响运行时性能（除非在装饰器中做了重的操作）
+
+// 4. 装饰器元数据需要reflect-metadata库
+// npm install reflect-metadata
+
+// 5. 装饰器不会修改原类型，需要通过descriptor返回新值
+</code></pre>
+<hr>
+<h2 id="实战练习">💪 实战练习</h2>
+<h3 id="练习1-实现性能监控装饰器">练习1：实现性能监控装饰器</h3>
+<pre><code class="language-typescript">// 实现一个@performance装饰器，自动监控方法执行时间
+// 如果超过阈值，输出警告
+
+// 你的代码：
+function performance(threshold: number = 1000) {
+  // 实现这里
+}
+</code></pre>
+<h3 id="练习2-实现自动绑定装饰器">练习2：实现自动绑定装饰器</h3>
+<pre><code class="language-typescript">// 实现一个@autobind装饰器，自动将方法绑定到实例
+// 使得方法作为回调传递时，this不会丢失
+
+// 你的代码：
+function autobind(target: any, methodName: string, descriptor: PropertyDescriptor) {
+  // 实现这里
+}
+</code></pre>
+<hr>
+<h2 id="下一步">⏭️ 下一步</h2>
+<p>装饰器是「需要编译期处理」的 TypeScript 的代表。回到正文继续：</p>
+<ul>
+<li><a href="#ch-08">第 08 章 · 工程化与 tsconfig</a> —— 讲清 <code>experimentalDecorators</code>、<code>emitDecoratorMetadata</code>、<code>erasableSyntaxOnly</code> 这几个开关到底在管什么</li>
+<li><a href="#ch-09">第 09 章 · 实战设计模式</a> —— 不用装饰器也能实现的那几个模式</li>
+<li><a href="#ch-11">第 11 章 · 面试速查表</a> —— 装饰器相关的面试题在这里</li>
+<li><a href="#ch-quick">速通版</a> —— 只想先跑起来的话</li>
+</ul>
+<hr>
+<blockquote>
+<p>💡 <strong>思考题</strong>：</p>
+<ol>
+<li>装饰器在什么时候执行？编译时还是运行时？</li>
+<li>如何实现一个带参数的装饰器工厂？</li>
+<li>什么是元编程？装饰器如何实现元编程？</li>
+</ol>
+</blockquote>
+
+</section>
+<section class="chapter" id="ch-内容" data-title="docs\内容校验与补全报告.md">
+<h1 id="内容校验与补全报告">内容校验与补全报告</h1>
+<blockquote>
+<p>生成时间：2026-10-05
+校验对象：<code>D:/deepseek/ts+py从零到一教程</code>
+校验依据：用户的生成提示词（原文见文末附录）</p>
+</blockquote>
+<hr>
+<h2 id="一-结论速览">一、结论速览</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>现有内容完整性</td>
+<td>✅ 12 章 + 速通版齐备，17,171 行 / 694 KB</td>
+</tr>
+<tr>
+<td>配套代码可编译</td>
+<td>✅ 16 个 <code>.ts</code> 文件全部通过 <code>tsc --noEmit</code>（strict + erasableSyntaxOnly）</td>
+</tr>
+<tr>
+<td>配套代码可运行</td>
+<td>✅ 12 个入口文件全部 <code>node xxx.ts</code> 跑通</td>
+</tr>
+<tr>
+<td>文档编码</td>
+<td>✅ 全 UTF-8，无 BOM，无解码失败字符</td>
+</tr>
+<tr>
+<td>内部链接</td>
+<td>✅ 44 个链接，0 断链</td>
+</tr>
+<tr>
+<td>阅读版 HTML</td>
+<td>✅ 14 个 section 配对，1074 个代码块渲染完整，无残留反引号</td>
+</tr>
+<tr>
+<td><strong>本次补齐</strong></td>
+<td>✅ 新增<strong>交互式练习站</strong>（浏览器直接答题 + 判分 + 错题本 + 面试速查）</td>
+</tr>
+</tbody></table>
+<p><strong>一句话结论</strong>：教程主体内容已经达标且质量很高，无需重写；用户提示词里唯一缺失的是
+「<strong>能直接阅读和练习的网站</strong>」——本次已补上，并加了 55 项自动化测试保证它真的能用。</p>
+<hr>
+<h2 id="二-逐条对照-用户提示词要求-vs-现状">二、逐条对照：用户提示词要求 vs 现状</h2>
+<p>用户提示词包含 9 个明确要求，逐条核对：</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>用户要求</th>
+<th>现状</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>有 JS 经验，从零到一</td>
+<td>速通版开篇即假设&quot;有一行 JS 都没写过 TS 的人&quot;</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>2</td>
+<td>实际可操作</td>
+<td><code>examples/</code> 16 个文件全部可 <code>node</code> 直跑、可 <code>tsc</code> 检查</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>3</td>
+<td>学习时间不能超长</td>
+<td>双轨设计：<strong>速通版约 2 小时</strong> + 完整版 15~20 小时</td>
+<td>✅ 达标且更优</td>
+</tr>
+<tr>
+<td>4</td>
+<td>把读者当&quot;最笨的人&quot;，越简单细致越好</td>
+<td>每章有&quot;先看真实报错 → 讲原理 → 常见坑速查 → 小结 → 动手练习&quot;结构；报错信息带错误码可复现</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>5</td>
+<td>讲语言设计哲学，让人醍醐灌顶</td>
+<td><strong>第 00 章整章讲设计哲学</strong>（11 条官方目标 + 4 条核心哲学 + 两个世界模型），后续章节反复回扣</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>6</td>
+<td>给出测试题确保会用</td>
+<td><strong>第 10 章 90 道分级题</strong>（快问快答 20 / 说类型 25 / 改错 10 / 面试 15 / 项目 5），全部带解析</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>7</td>
+<td>能通过面试</td>
+<td><strong>第 11 章</strong> 60 道高频题 + 10 道白板手写 + 5 张速查表 + 面试技巧</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>8</td>
+<td>能做项目</td>
+<td><strong>第 09 章</strong> 7 个实战模式 + <code>examples/project/</code> 一个完整类型安全项目</td>
+<td>✅ 达标</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>能做成网站直接阅读和练习</strong></td>
+<td>原本只有「阅读版」（只读）</td>
+<td>⚠️ <strong>缺失 → 本次补齐</strong></td>
+</tr>
+</tbody></table>
+<p><strong>唯一缺口</strong>：第 9 条。原仓库有单文件 HTML <strong>阅读版</strong>（能看，但不能练），
+缺少一个能<strong>直接做题、即时判分、记录错题</strong>的练习站。本次已补齐。</p>
+<hr>
+<h2 id="三-本次新增交付物">三、本次新增交付物</h2>
+<h3 id="1-交互式练习站-核心交付">1. 交互式练习站（核心交付）</h3>
+<p><strong>文件</strong>：<code>TypeScript从零到一-练习站.html</code>（根目录，66 KB 单文件）</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一关 · 判断对错</td>
+<td>20 题，点&quot;对/错&quot;<strong>即时判分</strong>，显示正确答案 + 解析 + &quot;回看第 XX 章&quot;标签，可单题重做</td>
+</tr>
+<tr>
+<td>第二关 · 说出类型</td>
+<td>25 题，显示代码片段，<strong>先自己想再点开答案</strong>，答案由 <code>tsc --declaration</code> 导出</td>
+</tr>
+<tr>
+<td>错题本</td>
+<td>第一关答错的题<strong>自动收集</strong>，按出处章节归类，提供&quot;我懂了，重做这题&quot;</td>
+</tr>
+<tr>
+<td>面试速查</td>
+<td>50 道真实面试问答，可折叠，<strong>支持关键词实时搜索</strong>（如搜 &quot;never&quot;）</td>
+</tr>
+<tr>
+<td>进度统计</td>
+<td>进度条 + 已答/正确/正确率/错题数，进度存 <code>localStorage</code>，关掉再开还在</td>
+</tr>
+<tr>
+<td>离线自包含</td>
+<td><strong>零外部请求</strong>（无 <code>&lt;link&gt;</code>、无 <code>&lt;script src&gt;</code>），双击即用，断网可答</td>
+</tr>
+</tbody></table>
+<p><strong>技术实现</strong>（可复现、可维护）：</p>
+<pre><code>docs/10-测试题与答案.md ─┐
+                        ├─→ extract-quiz.mjs ─→ site/quiz-bank.json ─┐
+docs/11-面试速查表.md ───┘                                           │
+                                                                     ├─→ build-practice.mjs ─→ 练习站.html
+tools/practice-template.html ────────────────────────────────────────┘
+</code></pre>
+<p>改了教程正文后跑 <code>npm run build:practice</code> 即可同步，不需要手改 HTML。</p>
+<h3 id="2-三个配套工具脚本-tools">2. 三个配套工具脚本（<code>tools/</code>）</h3>
+<table>
+<thead>
+<tr>
+<th>脚本</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>extract-quiz.mjs</code></td>
+<td>从 Markdown 抽取 45 道自测题 + 50 道面试题 → <code>quiz-bank.json</code></td>
+</tr>
+<tr>
+<td><code>build-practice.mjs</code></td>
+<td>把题库注入模板 → 单文件练习站（含自检：占位符残留、script 标签配对）</td>
+</tr>
+<tr>
+<td><code>test-practice.mjs</code></td>
+<td>用 jsdom 真实加载 HTML，模拟点击验证 <strong>55 项交互</strong></td>
+</tr>
+</tbody></table>
+<h3 id="3-文档更新">3. 文档更新</h3>
+<ul>
+<li><code>README.md</code>：新增练习站入口与使用顺序建议</li>
+<li><code>tools/README.md</code>：重写，补充练习站构建/测试/边界说明</li>
+<li><code>tools/package.json</code>：新增 <code>build:practice</code> / <code>build:all</code> / <code>check</code> / <code>test</code> 脚本</li>
+</ul>
+<hr>
+<h2 id="四-校验证据-可复现">四、校验证据（可复现）</h2>
+<h3 id="4-1-类型检查">4.1 类型检查</h3>
+<pre><code class="language-bash">cd examples
+node ./node_modules/typescript/bin/tsc --noEmit
+# 退出码 0，无任何输出 = 类型全对
+</code></pre>
+<p>配置为最严：<code>strict: true</code> + <code>noImplicitOverride</code> + <code>noFallthroughCasesInSwitch</code></p>
+<ul>
+<li><code>erasableSyntaxOnly</code> + <code>verbatimModuleSyntax</code>。</li>
+</ul>
+<h3 id="4-2-运行验证">4.2 运行验证</h3>
+<p>12 个入口文件全部跑通：</p>
+<pre><code>01-心智模型.ts 02-类型基础.ts 03-函数与对象.ts 04-收窄.ts 05-泛型.ts 06-类型体操.ts
+07-类与模块.ts project/main.ts answers/a1-event-bus.ts a2-result.ts a3-validate.ts a5-migrate.ts
+→ 全部 RUN OK
+</code></pre>
+<h3 id="4-3-仓库自检">4.3 仓库自检</h3>
+<pre><code>node tools/check.mjs
+→ 合计 14 个文件 17,171 行 / 694 KB
+→ 编码 OK（无 BOM、无替换字符）
+→ 44 个内部链接，断链 0 个
+→ 章节齐备性 00–11 全部 OK
+→ 无临时/探针文件残留
+→ HTML 阅读版：14 开 / 14 闭，表格 101 / 代码块 1074 / 二级目录 164，未渲染反引号 0
+→ 全部检查通过 ✅
+</code></pre>
+<h3 id="4-4-练习站测试">4.4 练习站测试</h3>
+<pre><code>node tools/test-practice.mjs
+→ 55 通过 / 0 失败
+</code></pre>
+<p>覆盖：题库 JSON 可解析、20+25 题渲染、答对判分、答错进错题本、错题重做、
+第二关答案展开/收起、面试题搜索过滤（含无匹配空状态）、标签页切换、
+全对后统计 100%、<code>localStorage</code> 持久化。</p>
+<h3 id="4-5-浏览器实测">4.5 浏览器实测</h3>
+<p>用无头 Chrome 实际加载并模拟点击，确认：</p>
+<ul>
+<li>首页渲染正常（进度条、统计、使用说明表格）</li>
+<li>答对第 1 题 → 题卡变绿、显示&quot;✓ 答对了 / 正确答案：错 / 02 章&quot;、统计 2/20</li>
+<li>答错 → 错题本出现该题，带&quot;回看 02 章&quot;标签</li>
+<li>面试速查展开显示完整答案</li>
+<li>唯一控制台信息是 <code>favicon.ico</code> 404（浏览器默认请求，非应用缺陷）</li>
+</ul>
+<hr>
+<h2 id="五-现有内容的质量观察-无需修改">五、现有内容的质量观察（无需修改）</h2>
+<p>抽样精读后，以下几点值得肯定：</p>
+<ol>
+<li><strong>报错信息真实</strong>。每处报错都带错误码（如 <code>TS2339</code>、<code>TS2693</code>、<code>TS1294</code>），
+且注明可从真实编译器复现——这比多数教程可靠。</li>
+<li><strong>讲&quot;为什么&quot;而非只讲&quot;怎么写&quot;</strong>。第 00 章直接引用 TypeScript 官方 Design Goals 原文，
+并逐条翻译成人话；后面每章遇到&quot;为什么必须这么写&quot;都能回扣。</li>
+<li><strong>主动讲清 TS 的边界</strong>。例如明确说 <code>Object.keys</code> 返回 <code>string[]</code> 而非 <code>&#39;a&#39;[]</code>
+是&quot;刻意的不精确&quot;，<code>Map.get</code> 为何必须处理 <code>undefined</code>——这些正是面试最爱考的。</li>
+<li><strong>面向未来的技术选择</strong>。用 <code>as const</code> 替代 <code>enum</code> 并解释原因（Node v26 移除
+<code>--experimental-transform-types</code>），而非仅仅说&quot;风格偏好&quot;。</li>
+<li><strong>有可运行配套代码</strong>，且真的全部通过最严配置检查——不是伪代码。</li>
+</ol>
+<hr>
+<h2 id="六-使用建议">六、使用建议</h2>
+<p><strong>给用户的最短路径</strong>：</p>
+<ol>
+<li>双击 <code>TypeScript从零到一-练习站.html</code>，花 10 分钟做完第一关，先摸到自己的盲区</li>
+<li>读 <code>速通版-2小时上手TypeScript.md</code>，把 <code>examples/</code> 跑起来</li>
+<li>按练习站&quot;概览&quot;页的 5 步顺序推进：读 00–05 章 → 做第一关 → 读 06 章 → 做第二关 → 清错题本</li>
+<li>面试前刷练习站的&quot;面试速查&quot;，<strong>先自答再展开</strong></li>
+</ol>
+<p><strong>维护方式</strong>：改正文 → <code>cd tools &amp;&amp; npm run build:all</code> → 自动重建阅读版 + 练习站
+→ <code>npm run check &amp;&amp; npm test</code> 验证。</p>
+<hr>
+<h2 id="附录-用户原始提示词">附录：用户原始提示词</h2>
+<blockquote>
+<p>读取工作目录，生成内容的提示词是：（我现在有 JavaScript 经验，现在给我从零到一生成一份
+实际可操作，但是学习时间又不能超长的 typescript 教程。你把我当成最笨的人，给我把每个知识点
+讲的越简单细致越好。能讲一些语言的设计哲学，让人醍醐灌顶最好。最后给出测试题，确保我真的会用，
+可以通过面试，能做项目。）进行内容校验，检查和补全。如果能做成网站直接阅读和练习最好。</p>
 </blockquote>
 
 </section>
